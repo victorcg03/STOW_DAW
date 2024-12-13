@@ -1,0 +1,77 @@
+header{
+    width: 100%;
+    height: 60px;
+    background-color: rgba(33,37,41, 0.85);
+    padding: 5px 40px;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    place-content: center;
+    color: #fff;
+    position: fixed;
+    top: 0px;
+    nav{
+        display: flex;
+        align-items: center;
+        justify-content: right;
+    }
+    i{
+        font-size: 1.8em;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+    nav i{
+        margin-left: 35px;
+    }
+    i:hover, a:hover{
+        color: gold;
+    }
+    a{
+        transition: color 0.2s;
+    }
+    .fa-bars{
+        font-size: 2.3em;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+    }
+    .central{
+        text-align: center;
+        :nth-child(2){
+            font-size: 1.95em;
+            font-weight: 900;
+        }
+        a{
+            margin: 0 10px;
+            font-size: 1.2em;
+        }
+    }
+}
+@media screen and (max-width:900px) {
+    header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .central{
+            padding: 0 25px;
+            font-size: 13px;
+            display: grid;
+            grid-template-areas: "stow stow"
+                                "productos nosotros";
+            grid-template-columns: 150px 150px;
+            :first-child{
+                grid-area: productos;
+                text-align: right;
+            }
+            :last-child{
+                grid-area: nosotros;
+                text-align: left;
+            }
+            :nth-child(2){
+                grid-area: stow;
+            }
+        }
+    }
+}
+@media screen and (max-width:650px){
+    
+}
