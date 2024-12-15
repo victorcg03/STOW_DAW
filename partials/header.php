@@ -38,7 +38,7 @@ session_start();
             <i class="fa-solid fa-search" data-menu="busqueda"></i>
             <i class="fa-solid fa-shopping-cart" data-menu="carrito"></i>
         </nav>
-        <div class="menu-izquierdo">
+        <div class="menu-izquierdo menu">
             <ul>
                 <li><a href="./productos.php">Productos</a></li>
                 <li>
@@ -76,13 +76,13 @@ session_start();
                 </li>
             </ul>
         </div>
-        <div class="carrito">
+        <div class="carrito menu">
 
         </div>
-        <div class="busqueda">
+        <div class="busqueda menu">
             <input type="search" name="search" id="search" placeholder="Buscar...">
         </div>
-        <div class="usuario">
+        <div class="usuario menu">
             <?php
             if (empty($_SESSION['user'])) { ?>
                 <div>
