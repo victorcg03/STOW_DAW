@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "./database.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,7 +13,6 @@ session_start();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/cade5ed75a.js" crossorigin="anonymous"></script>
-    <script src="../js/header.js"></script>
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/reset.css">
     <script type="text/javascript">
@@ -24,7 +24,11 @@ session_start();
         }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+    <script src="../js/header.js">
+    </script>
+    <script>
+        const usuario = <?= isset($_SESSION['user']) ? "'".$_SESSION['user']."'" : 'null' ?>;
+    </script>
 </head>
 
 <body>
@@ -44,19 +48,19 @@ session_start();
                 <li>
                     <ul>
                         <li>
-                            <a href="./productos.php/?sexo=hombre">Hombre</a>
+                            <a href="./productos.php?sexo=hombre">Hombre</a>
                             <ul>
-                                <li><a href="./productos.php/?sexo=hombre&tipo=sudaderas">Sudaderas</a></li>
-                                <li><a href="./productos.php/?sexo=hombre&tipo=camisetas">Camisetas</a></li>
-                                <li><a href="./productos.php/?sexo=hombre&tipo=gorros">Gorros</a></li>
+                                <li><a href="./productos.php?sexo=hombre&tipo=sudadera">Sudaderas</a></li>
+                                <li><a href="./productos.php?sexo=hombre&tipo=camiseta">Camisetas</a></li>
+                                <li><a href="./productos.php?sexo=hombre&tipo=gorro">Gorros</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="./productos.php/?sexo=mujer">Mujer</a>
+                            <a href="./productos.php?sexo=mujer">Mujer</a>
                             <ul>
-                                <li><a href="./productos.php/?sexo=mujer&tipo=sudaderas">Sudaderas</a></li>
-                                <li><a href="./productos.php/?sexo=mujer&tipo=camisetas">Camisetas</a></li>
-                                <li><a href="./productos.php/?sexo=mujer&tipo=gorros">Gorros</a></li>
+                                <li><a href="./productos.php?sexo=mujer&tipo=sudadera">Sudaderas</a></li>
+                                <li><a href="./productos.php?sexo=mujer&tipo=camiseta">Camisetas</a></li>
+                                <li><a href="./productos.php?sexo=mujer&tipo=gorro">Gorros</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -80,7 +84,12 @@ session_start();
 
         </div>
         <div class="busqueda menu">
-            <input type="search" name="search" id="search" placeholder="Buscar...">
+            <form action="./productos.php" method="GET">
+                <input type="search" name="search" id="search" placeholder="Buscar...">
+            </form>
+            <div class="resultados">
+
+            </div>
         </div>
         <div class="usuario menu">
             <?php
