@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
                 }
                 let resultados = document.querySelector(".resultados");
                 resultados.innerHTML = "";
-                let productos = JSON.parse(await response.text());
+                let productos = JSON.parse(response.text());
                 productos.forEach(producto => {
                     resultados.innerHTML += `<div class="producto">
                         <img src="./img/img1.jpg">
