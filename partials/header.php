@@ -27,7 +27,7 @@ require_once "./database.php";
     <script src="../js/header.js">
     </script>
     <script>
-        const usuario = <?= isset($_SESSION['user']) ? "'".$_SESSION['user']."'" : 'null' ?>;
+        const usuario = <?= isset($_SESSION['user']) ? "'" . $_SESSION['user'] . "'" : 'null' ?>;
     </script>
 </head>
 
@@ -99,7 +99,11 @@ require_once "./database.php";
                     <p>o</p>
                     <a href="./register.php">Registrarse</a>
                 </div>
-            <?php  }
+            <?php  } else { ?>
+                <div class="user">
+                    <a href="./logout.php">Cerrar sesión</a>
+                </div>
+            <?php }
             ?>
         </div>
     </header>

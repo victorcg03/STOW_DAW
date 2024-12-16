@@ -1,9 +1,14 @@
 window.addEventListener('load', ()=>{
-    document.querySelector("#google_translate_element .skiptranslate").childNodes.forEach(nodo => {
-        if (nodo.nodeName === "#text" || nodo.nodeName === "SPAN") {
-            nodo.remove();
+    setTimeout(() => {
+        const translateElement = document.querySelector("#google_translate_element .skiptranslate");
+        if (translateElement) {
+            translateElement.childNodes.forEach(nodo => {
+                if (nodo.nodeName === "#text" || nodo.nodeName === "SPAN") {
+                    nodo.remove();
+                }
+            });
         }
-    });
+    }, 500);
     verPass.addEventListener("click", ()=>{
         verPass.classList.toggle("fa-eye");
         verPass.classList.toggle("fa-eye-slash");

@@ -122,6 +122,25 @@ body{
         transform: scale(1.1);
         color: gold;
     }
+    .tieneCuenta{
+        padding-top: 20px;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        a{
+            color: goldenrod;
+        }
+    }
+}
+.error{
+    color: red;
+    font-weight: 900;
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    text-align: center;
 }
 @media screen and (max-width:600px){
     body{

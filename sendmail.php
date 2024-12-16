@@ -12,7 +12,7 @@ function enviarCorreo($destinatario, $asunto, $mensaje)
     require './PHPMailer/src/PHPMailer.php';
     /*Clase SMTP necesaria para la conexión con un servidor SMTP*/
     require './PHPMailer/src/SMTP.php';
-    $debug = true;
+    $debug = false;
     try {
         // Crear instancia de la clase PHPMailer
         $mail = new PHPMailer($debug);

@@ -4,6 +4,25 @@ if (!empty($_SESSION['user'])) {
     header("Location: ./index.php");
     return;
 }
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["correo"]) && !empty($_POST["password"])) {
+    require_once "./database.php";
+    $statement = $conne->prepare("SELECT * FROM usuarios WHERE LOWER(Correo) = LOWER(:correo) LIMIT 1");
+    $statement->bindParam(":correo", $_POST["correo"]);
+    $statement->execute();
+
+    if($statement->rowCount() != 0) {
+        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $passwordHash = $data[0]["Contrasena"];
+        if (password_verify($_POST["password"], $passwordHash)) {
+            $_SESSION["user"] = $_POST["correo"];
+            header("Location: ./");
+        } else {
+            $error = "Contraseña incorrecta";
+        }
+    } else {
+        $error = "Ese correo no pertenece a ningún usuario registrado";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -49,6 +68,12 @@ if (!empty($_SESSION['user'])) {
                 <button>Enviar</button>
             </div>
         </form>
+        <p class="tieneCuenta">¿Todavía no tienes una cuenta?<a href="./register.php"> Registrarse</a></p>
+        <?php 
+            if (!empty($error)) { ?>
+                <p class="error"><?= $error ?></p>
+            <?php }
+        ?>
     </div>
     <div id="google_translate_element"></div>
 </body>
