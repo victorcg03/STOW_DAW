@@ -26,9 +26,6 @@ require_once "./database.php";
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="../js/header.js">
     </script>
-    <script>
-        const usuario = <?= isset($_SESSION['user']) ? "'" . $_SESSION['user'] . "'" : 'null' ?>;
-    </script>
 </head>
 
 <body>

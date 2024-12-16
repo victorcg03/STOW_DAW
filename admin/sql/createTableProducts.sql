@@ -1,5 +1,4 @@
--- Active: 1734185855675@@127.0.0.1@3306@stow
-DROP TABLE Productos;
+DROP TABLE IF EXISTS Productos;
 CREATE TABLE Productos (
     ID VARCHAR(10) PRIMARY KEY,
     Nombre VARCHAR(255),

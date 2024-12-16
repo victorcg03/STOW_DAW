@@ -23,17 +23,45 @@ window.addEventListener('load', () => {
             carrousel.style.transform = `translateX(-${currentIndex*100}%)`;
         });
     });
-    document.querySelectorAll(".producto .fa-regular.fa-heart").forEach(corazon => corazon.addEventListener("click", ()=>{
-        comprobarSesion();
+    document.querySelectorAll(".producto .fa-regular.fa-heart").forEach(corazon => corazon.addEventListener("click", async()=>{
+       
+        
         const corazonFondo = corazon.closest(".producto").querySelector(".fa-solid");
-        corazonFondo.style.display = window.getComputedStyle(corazonFondo).display == "none" ? "block" : "none";
+        const idProducto = corazon.closest(".producto").dataset.id;
+        let usuario = await comprobarSesion();
+        fetch("saveLike.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "idProducto" : idProducto, 
+                "usuario" : usuario
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    corazonFondo.style.display = window.getComputedStyle(corazonFondo).display == "none" ? "block" : "none";
+                } else {
+                    console.log(data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error guardando el like:", error);
+            });
     }));
+    
     document.querySelectorAll(".producto .anadirCesta").forEach(botonAnadir => botonAnadir.addEventListener("click", ()=>{
-        comprobarSesion();
+
     }));
-    function comprobarSesion(){
-        if (!usuario) {
-            window.location.href = './register.php';
+    async function comprobarSesion(){
+        let respuesta = await fetch("./verificarSesionIniciada.php");
+        let data = await respuesta.json();
+        if (!data.loggedIn) {
+            window.location.href = "login.php";
         }
+        return data.user;
+        
     }
 });
