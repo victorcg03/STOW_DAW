@@ -78,7 +78,7 @@ require_once "./database.php";
             </ul>
         </div>
         <div class="carrito menu">
-
+        
         </div>
         <div class="busqueda menu">
             <form action="./productos.php" method="GET">

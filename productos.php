@@ -68,13 +68,13 @@ function tieneLike($idProducto){
 
                     <div class="comprar">
                         <button class="anadirCesta">Añadir a la cesta</button>
-                        <select name="talla">
+                        <select class="tallaProducto" name="talla">
                             <?php
                             $tallas = explode(",", $producto['Stock']);
                             foreach ($tallas as $talla) {
                                 $partes = explode(":", $talla); ?>
 
-                                <option class="notranslate" value="<?= $partes[0] ?>" <?= $partes[1] == 0 ? "disabled" : "" ?>><?= trim($partes[0]) ?></option>
+                                <option data-stock="<?= $partes[1] ?>" class="notranslate" value="<?= $partes[0] ?>" <?= $partes[1] == 0 ? "disabled" : "" ?>><?= trim($partes[0]) ?></option>
                             <?php  }
                             ?>
                         </select>

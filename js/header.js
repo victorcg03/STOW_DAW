@@ -1,5 +1,4 @@
 window.addEventListener("load", () => {
-    
     setTimeout(() => {
         const translateElement = document.querySelector("#google_translate_element .skiptranslate");
         if (translateElement) {
@@ -10,7 +9,7 @@ window.addEventListener("load", () => {
             });
         }
     }, 500);
-    document.querySelectorAll("header i").forEach(el => el.addEventListener("click", () => {
+    document.querySelectorAll("header .fa-solid").forEach(el => el.addEventListener("click", () => {
         let visible = document.querySelector(`.visible:not(.${el.dataset.menu})`);
         if (visible) {
             visible.classList.remove("visible");
@@ -19,13 +18,17 @@ window.addEventListener("load", () => {
             document.querySelector(`.${el.dataset.menu}`).classList.toggle("visible");
         }, visible ? 400 : 0);
     }));
-    document.querySelector("main").addEventListener("click", () => {
+    document.querySelector("main").addEventListener("click", (event) => {
         let menu = document.querySelector(".visible");
-        if (menu) {
+        if (menu && (!menu.classList.contains("carrito") || !event.target.classList.contains("anadirCesta"))) {
             menu.classList.remove("visible");
         }
     });
-
+    const cookie = getCookie("productosCarrito");      
+    let productosCarritoCookie = cookie ? JSON.parse(cookie) : [];
+    productosCarritoCookie.forEach(p => {
+        document.querySelector(".carrito").innerHTML +=  productoCestaPlantillaHeader(p.talla, p.idProducto, p.img, p.nombre, p.stock, p.precio, p.cantidad);
+    });
     search.addEventListener("input", async () => {
         if (search.value.length > 0) {
             try {
@@ -51,4 +54,42 @@ window.addEventListener("load", () => {
             }
         }
     });
+    document.querySelector(".carrito").addEventListener("click", (event) => {
+        if (event.target.tagName === "I") {
+            event.target.closest(".producto").classList.add("eliminar");
+            const cookie = getCookie("productosCarrito");
+            let productosCarritoCookie = cookie ? JSON.parse(cookie) : [];
+
+            productosCarritoCookie = productosCarritoCookie.filter(producto => 
+                !(producto.idProducto == event.target.dataset.id && producto.talla == event.target.dataset.talla)
+            );
+            document.cookie = `productosCarrito=${encodeURIComponent(JSON.stringify(productosCarritoCookie))}; path=/; max-age=3600`;
+            setTimeout(() => {
+                event.target.closest(".producto").remove()
+            }, 700);
+        }
+    });
 });
+
+
+const getCookie = (name) => {
+    const cookies = document.cookie.split("; ");
+    for (let cookie of cookies) {
+        const [key, value] = cookie.split("=");
+        if (key === name) return decodeURIComponent(value);
+    }
+    return null;
+};
+
+const productoCestaPlantillaHeader = (talla, idProducto, img, nombre, max, precio, cantidad) => {
+    return `<div class="producto" data-talla="${talla}" data-id="${idProducto}">
+                <img src="./img/${img}">
+                <div class="producto-info">
+                    <p class="nombre">${nombre}</p>
+                    <p data-talla="${talla}" class="talla">Talla: ${talla}</p>
+                    <div class="cantidad">Cantidad: <input type="number" min="1" max="${max}" value="${cantidad}"></div>
+                    <p>Precio: ${precio}</p>
+                </div>
+                <i class="fa-regular fa-trash-can" data-id="${idProducto}" data-talla="${talla}"></i>
+            </div>`;
+}
