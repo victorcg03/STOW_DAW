@@ -36,7 +36,7 @@ main {
     }
     .productos {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        grid-template-columns: repeat(auto-fit, minMax(200px, 250px));
         gap: 30px;
         padding: 35px 20px;
         place-content: center;

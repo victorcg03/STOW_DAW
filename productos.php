@@ -6,19 +6,19 @@ if (!empty($_GET['tipo'])) {
     $statement->bindParam(":sexo", $_GET["sexo"]);
     $statement->bindParam(":tipo", $_GET["tipo"]);
     $statement->execute();
-    $productos = $statement->fetchAll();
+    $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
 } else if (!empty($_GET['sexo'])) {
     $statement = $conne->prepare("SELECT * FROM productos WHERE Sexo = :sexo");
     $statement->bindParam(":sexo", $_GET["sexo"]);
     $statement->execute();
-    $productos = $statement->fetchAll();
+    $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
 } else if (!empty($_GET['search'])) {
     $response = file_get_contents("http://localhost/search.php?search=" . urlencode($_GET['search']));
     $productos = json_decode($response, true);
 } else {
     $statement = $conne->prepare("SELECT * FROM productos");
     $statement->execute();
-    $productos = $statement->fetchAll();
+    $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 $likedProductIds = [];
 if (!empty($_SESSION["user"])) {
@@ -27,7 +27,8 @@ if (!empty($_SESSION["user"])) {
     $statement->execute();
     $likedProductIds = $statement->fetchAll(PDO::FETCH_COLUMN);
 }
-function tieneLike($idProducto){
+function tieneLike($idProducto)
+{
     global $likedProductIds;
     return in_array($idProducto, $likedProductIds) ? "block" : "none";
 }
@@ -37,8 +38,75 @@ function tieneLike($idProducto){
 <main>
     <div class="barra-busqueda">
         <p>Buscar: </p>
-        <form action="./productos.php">
+        <form action="./productos">
             <input type="text" name="search" placeholder="Sudadera blanca...">
+        </form>
+    </div>
+    <div id="filtros">
+        <form action="./productos">
+            <input type="text" name="search" hidden value="<?= !empty($_GET["search"]) ? $_GET["search"] : "" ?>">
+            <div class="filtro">
+                <label for="sexo">Sexo: </label>
+                <select name="sexo" id="sexo">
+                    <option>Seleccionar</option>
+                    <option value="hombre">Hombre</option>
+                    <option value="mujer">Mujer</option>
+                </select>
+            </div>
+            <div class="filtro">
+                <label for="color">Color: </label>
+                <select name="color" id="color">
+                    <option>Seleccionar</option>
+                    <?php
+                        $colores = array_unique(array_column($productos, 'Color'));
+                        sort($colores);
+                        foreach ($colores as $color) { ?>
+                            <option value="<?= $color ?>"><?=$color?></option>
+                <?php   }
+                    ?>
+                </select>
+            </div>
+            <div class="filtro">
+                <label for="tipo">Tipo: </label>
+                <select name="tipo" id="tipo">
+                    <option>Seleccionar</option>
+                    <?php
+                        $tipos = array_unique(array_column($productos, 'ClaseProducto'));
+                        sort($tipos);
+                        foreach ($tipos as $tipo) { ?>
+                            <option value="<?= $tipo ?>"><?= $tipo ?></option>
+                <?php   }
+                    ?>
+                </select>
+            </div>
+            <div class="filtro">
+                <label for="talla">Talla: </label>
+                <select name="talla" id="talla">
+                    <option>Seleccionar</option>
+                    <?php
+                        $tallasDisponibles = [];
+                        foreach ($productos as $producto) {
+                            $stock = $producto['Stock'];
+                            
+                            $pares = explode(', ', $stock);
+                            
+                            foreach ($pares as $par) {
+                                list($talla, $cantidad) = explode(':', $par);
+                                if ((int)$cantidad > 0) {
+                                    $tallasDisponibles[] = $talla;
+                                }
+                            }
+                        }
+                        $ordenTallas = ['XS', 'S', 'M', 'L', 'XL'];
+                        usort($tallasDisponibles, function($a, $b) use ($ordenTallas) {
+                            return array_search($a, $ordenTallas) - array_search($b, $ordenTallas);
+                        });
+                        foreach (array_unique($tallasDisponibles) as $talla) { ?>
+                            <option value="<?= $talla ?>"><?= $talla ?></option>
+                        <?php }
+                    ?>
+                </select>
+            </div>
         </form>
     </div>
     <p class="productos-encontrados">Productos encontrados: <?= count($productos) ?></p>
@@ -48,7 +116,7 @@ function tieneLike($idProducto){
             <div class="producto" data-id="<?= $producto['ID'] ?>">
                 <span class="fa-layers fa-fw">
                     <i class="fa-regular fa-heart"></i>
-                    <i class="fa-solid fa-heart" style="display:<?=  tieneLike($producto['ID'])?>"></i>
+                    <i class="fa-solid fa-heart" style="display:<?= tieneLike($producto['ID']) ?>"></i>
                 </span>
                 <div class="imagenes">
                     <i class="fa-solid fa-angle-right"></i>

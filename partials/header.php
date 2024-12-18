@@ -41,23 +41,23 @@ require_once "./database.php";
         </nav>
         <div class="menu-izquierdo menu">
             <ul>
-                <li><a href="./productos.php">Productos</a></li>
+                <li><a href="./productos">Productos</a></li>
                 <li>
                     <ul>
                         <li>
-                            <a href="./productos.php?sexo=hombre">Hombre</a>
+                            <a href="./productos?sexo=hombre">Hombre</a>
                             <ul>
-                                <li><a href="./productos.php?sexo=hombre&tipo=sudadera">Sudaderas</a></li>
-                                <li><a href="./productos.php?sexo=hombre&tipo=camiseta">Camisetas</a></li>
-                                <li><a href="./productos.php?sexo=hombre&tipo=gorro">Gorros</a></li>
+                                <li><a href="./productos?sexo=hombre&tipo=sudadera">Sudaderas</a></li>
+                                <li><a href="./productos?sexo=hombre&tipo=camiseta">Camisetas</a></li>
+                                <li><a href="./productos?sexo=hombre&tipo=gorro">Gorros</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="./productos.php?sexo=mujer">Mujer</a>
+                            <a href="./productos?sexo=mujer">Mujer</a>
                             <ul>
-                                <li><a href="./productos.php?sexo=mujer&tipo=sudadera">Sudaderas</a></li>
-                                <li><a href="./productos.php?sexo=mujer&tipo=camiseta">Camisetas</a></li>
-                                <li><a href="./productos.php?sexo=mujer&tipo=gorro">Gorros</a></li>
+                                <li><a href="./productos?sexo=mujer&tipo=sudadera">Sudaderas</a></li>
+                                <li><a href="./productos?sexo=mujer&tipo=camiseta">Camisetas</a></li>
+                                <li><a href="./productos?sexo=mujer&tipo=gorro">Gorros</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -67,13 +67,13 @@ require_once "./database.php";
                     <div id="google_translate_element"></div>
                 </li>
                 <li>
-                    <a href="./contacto.php">Contacto</a>
+                    <a href="./contacto">Contacto</a>
                 </li>
                 <li>
-                    <a href="./nosotros.php">Sobre nosotros</a>
+                    <a href="./nosotros">Sobre nosotros</a>
                 </li>
                 <li>
-                    <a href="./opiniones.php">Opiniones</a>
+                    <a href="./opiniones">Opiniones</a>
                 </li>
             </ul>
         </div>
@@ -81,7 +81,7 @@ require_once "./database.php";
         
         </div>
         <div class="busqueda menu">
-            <form action="./productos.php" method="GET">
+            <form action="./productos" method="GET">
                 <input type="search" name="search" id="search" placeholder="Buscar...">
             </form>
             <div class="resultados">
@@ -92,13 +92,13 @@ require_once "./database.php";
             <?php
             if (empty($_SESSION['user'])) { ?>
                 <div>
-                    <a href="./login.php">Iniciar sesión</a>
+                    <a href="./login">Iniciar sesión</a>
                     <p>o</p>
-                    <a href="./register.php">Registrarse</a>
+                    <a href="./register">Registrarse</a>
                 </div>
             <?php  } else { ?>
                 <div class="user">
-                    <a href="./logout.php">Cerrar sesión</a>
+                    <a href="./logout">Cerrar sesión</a>
                 </div>
             <?php }
             ?>

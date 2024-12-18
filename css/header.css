@@ -62,10 +62,20 @@ header{
                 text-align: center;
             }
         }
+        .menu{
+            width: 100dvw !important;
+        }
     }
     .carrito, .usuario, .menu-izquierdo{
-        height: calc(100vh - 90px);
+        height: calc(100dvh - 90px) !important;
     }
+    .busqueda{
+        .resultados{
+            height: fit-content;
+            max-height: calc(100dvh - 125px) !important;
+        }
+    }
+
 }
 .menu-izquierdo{
     text-transform: capitalize;
@@ -75,7 +85,7 @@ header{
     top: 100%;
     width: 250px;
     padding: 15px 20px;
-    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
     transform: translateX(-250px);
     background-color: rgba(33,37,41, 0.85);
     ul{
@@ -111,7 +121,7 @@ header{
     top: 100%;
     right: 0px;
     transform: translateX(+450px);
-    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
     width: 450px;
     background-color: rgba(33,37,41, 0.85);
 }
@@ -145,7 +155,7 @@ header{
         overflow-y: auto;
         position: absolute;
         height: fit-content;
-        max-height: calc(100vh - 95px);
+        max-height: calc(100dvh - 95px);
         top: 100%;
         background-color: rgba(33,37,41, 0.85);
         width: 100%;
@@ -207,6 +217,7 @@ header{
             input{
                 all:unset;
                 width: fit-content;
+                padding: 2px 5px;
                 color: #fff;
                 border-radius:5px;
                 border: 1px solid #fff;
