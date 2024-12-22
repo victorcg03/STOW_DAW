@@ -18,7 +18,7 @@ require_once "./database.php";
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
-                pageLanguage: 'en',
+                pageLanguage: 'es',
                 includedLanguages: 'en,es,fr,de,it'
             }, 'google_translate_element');
         }
@@ -78,7 +78,7 @@ require_once "./database.php";
             </ul>
         </div>
         <div class="carrito menu">
-        
+            <div class="mensaje">No hay productos en el carrito</div>
         </div>
         <div class="busqueda menu">
             <form action="./productos" method="GET">
