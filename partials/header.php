@@ -78,7 +78,13 @@ require_once "./database.php";
             </ul>
         </div>
         <div class="carrito menu">
+            <div id="carrito"></div>
             <div class="mensaje">No hay productos en el carrito</div>
+            <div class="info-carrito display-none">
+                <p>Unidades: <span id="unidades"></span></p>
+                <p>Total (IVA NO incluido): <span id="total"></span>€</p>
+                <a href="./carrito">Ver artículos en tu cesta</a>
+            </div>
         </div>
         <div class="busqueda menu">
             <form action="./productos" method="GET">

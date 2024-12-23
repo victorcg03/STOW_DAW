@@ -63,6 +63,7 @@ function habilitarBotonesCompra(){
         botonAnadir.addEventListener("click", async () => {
             if (await comprobarSesion()) {
                 document.querySelector(".carrito .mensaje").classList.add("display-none");
+                document.querySelector(".carrito .info-carrito").classList.remove("display-none");
                 const cookie = getCookie("productosCarrito");
                 let productosCarritoCookie = cookie ? JSON.parse(cookie) : [];
                 const producto = botonAnadir.closest(".producto");
@@ -70,7 +71,7 @@ function habilitarBotonesCompra(){
                 const stock = producto.querySelector(`.tallaProducto > option[value="${talla}"]`).dataset.stock;
                 const id = producto.dataset.id;
 
-                const inputSelector = `.carrito .producto[data-talla="${talla}"][data-id="${id}"] input`;
+                const inputSelector = `#carrito .producto[data-talla="${talla}"][data-id="${id}"] input`;
                 const input = document.querySelector(inputSelector);
                 const productoEncontrado = productosCarritoCookie.find(producto => producto.idProducto == id && producto.talla == talla);
 
@@ -97,11 +98,12 @@ function habilitarBotonesCompra(){
                     };
                     productosCarritoCookie.push(productoCookie);
 
-                    document.querySelector(".carrito").innerHTML += productoCestaPlantilla(talla, id, img, nombre, stock, precio, 1);
+                    document.querySelector("#carrito").innerHTML += productoCestaPlantilla(talla, id, img, nombre, stock, precio, 1);
                 }
 
                 document.cookie = `productosCarrito=${encodeURIComponent(JSON.stringify(productosCarritoCookie))}; path=/; max-age=3600`;
                 document.querySelector(".carrito").classList.add("visible");
+                actualizarInfoCesta(productosCarritoCookie);
             }
     }));
 }

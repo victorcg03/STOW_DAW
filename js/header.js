@@ -41,12 +41,14 @@ function habilitarMain(){
 function cargarCarrito(){
     const cookie = getCookie("productosCarrito");
     let productosCarritoCookie = cookie ? JSON.parse(cookie) : [];
-    const carrito = document.querySelector(".carrito");
+    const carrito = document.querySelector("#carrito");
     if (productosCarritoCookie.length > 0) {
         document.querySelector(".carrito .mensaje").classList.add("display-none");
+        document.querySelector(".carrito .info-carrito").classList.remove("display-none");
         productosCarritoCookie.forEach(p => {
             carrito.innerHTML += productoCestaPlantilla(p.talla, p.idProducto, p.img, p.nombre, p.stock, p.precio, p.cantidad);
         });
+        actualizarInfoCesta(productosCarritoCookie);
     }
 }
 function habilitarSearch(){
@@ -87,12 +89,15 @@ function habilitarInteraccionesProductos(){
                 !(producto.idProducto == event.target.dataset.id && producto.talla == event.target.dataset.talla)
             );
             document.cookie = `productosCarrito=${encodeURIComponent(JSON.stringify(productosCarritoCookie))}; path=/; max-age=3600`;
-            if (productosCarritoCookie.length == 0) {
-            }
+
             setTimeout(() => {
                 event.target.closest(".producto").remove()
-                document.querySelector(".carrito .mensaje").classList.remove("display-none");
+                if (productosCarritoCookie.length == 0) {
+                    document.querySelector(".carrito .mensaje").classList.remove("display-none");
+                    document.querySelector(".carrito .info-carrito").classList.add("display-none");
+                }
             }, 700);
+            actualizarInfoCesta(productosCarritoCookie);
         }
         if (event.target.type === "number") {
             event.preventDefault();
@@ -118,8 +123,8 @@ function habilitarInteraccionesProductos(){
             });
 
             document.cookie = `productosCarrito=${encodeURIComponent(JSON.stringify(productosCarritoCookie))}; path=/; max-age=3600`;
+            actualizarInfoCesta(productosCarritoCookie);
         }
-
     });
 }
 
@@ -153,4 +158,14 @@ async function comprobarSesion() {
         return false;
     }
     return data.user;
+}
+function actualizarInfoCesta(productos) {
+    const total = productos.reduce((totalCesta, producto) => { 
+        return totalCesta + (parseFloat(producto.precio) * producto.cantidad);
+    }, 0).toFixed(2);
+    document.getElementById("total").innerText = total;
+    const unidades = productos.reduce((numProductos, producto) =>{
+        return numProductos + producto.cantidad;
+    },0);
+    document.getElementById("unidades").innerText = unidades;
 }
