@@ -26,7 +26,7 @@
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         $verificado = $data[0]["Verificado"];
-        if ($verificado != "false") {
+        if ($verificado == "True") {
             $_SESSION['user'] = $correoUsuario;
             header("Location: ./");
         } else {

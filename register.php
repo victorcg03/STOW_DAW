@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST["nombre"]) && !empty($
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
-                pageLanguage: 'en',
+                pageLanguage: 'es',
                 includedLanguages: 'en,es,fr,de,it'
             }, 'google_translate_element');
         }

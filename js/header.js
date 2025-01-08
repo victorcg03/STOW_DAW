@@ -1,4 +1,13 @@
 window.addEventListener("load", () => {
+    traductorGoogle();
+    habilitarBotonesHeader();
+    habilitarMain();
+    cargarCarrito();
+    habilitarSearch();
+    habilitarInteraccionesProductos();
+});
+
+function traductorGoogle(){
     setTimeout(() => {
         const translateElement = document.querySelector("#google_translate_element .skiptranslate");
         if (translateElement) {
@@ -9,6 +18,8 @@ window.addEventListener("load", () => {
             });
         }
     }, 500);
+}
+function habilitarBotonesHeader(){
     document.querySelectorAll("header .fa-solid").forEach(el => el.addEventListener("click", () => {
         let visible = document.querySelector(`.visible:not(.${el.dataset.menu})`);
         if (visible) {
@@ -18,17 +29,29 @@ window.addEventListener("load", () => {
             document.querySelector(`.${el.dataset.menu}`).classList.toggle("visible");
         }, visible ? 400 : 0);
     }));
+}
+function habilitarMain(){
     document.querySelector("main").addEventListener("click", (event) => {
         let menu = document.querySelector(".visible");
         if (menu && (!menu.classList.contains("carrito") || !event.target.classList.contains("anadirCesta"))) {
             menu.classList.remove("visible");
         }
     });
+}
+function cargarCarrito(){
     const cookie = getCookie("productosCarrito");
     let productosCarritoCookie = cookie ? JSON.parse(cookie) : [];
-    productosCarritoCookie.forEach(p => {
-        document.querySelector(".carrito").innerHTML += productoCestaPlantilla(p.talla, p.idProducto, p.img, p.nombre, p.stock, p.precio, p.cantidad);
-    });
+    const carrito = document.querySelector("#carrito");
+    if (productosCarritoCookie.length > 0) {
+        document.querySelector(".carrito .mensaje").classList.add("display-none");
+        document.querySelector(".carrito .info-carrito").classList.remove("display-none");
+        productosCarritoCookie.forEach(p => {
+            carrito.innerHTML += productoCestaPlantilla(p.talla, p.idProducto, p.img, p.nombre, p.stock, p.precio, p.cantidad);
+        });
+        actualizarInfoCesta(productosCarritoCookie);
+    }
+}
+function habilitarSearch(){
     search.addEventListener("input", async () => {
         if (search.value.length > 0) {
             try {
@@ -54,6 +77,8 @@ window.addEventListener("load", () => {
             }
         }
     });
+}
+function habilitarInteraccionesProductos(){
     document.querySelector(".carrito").addEventListener("click", (event) => {
         if (event.target.tagName === "I") {
             event.target.closest(".producto").classList.add("eliminar");
@@ -64,9 +89,15 @@ window.addEventListener("load", () => {
                 !(producto.idProducto == event.target.dataset.id && producto.talla == event.target.dataset.talla)
             );
             document.cookie = `productosCarrito=${encodeURIComponent(JSON.stringify(productosCarritoCookie))}; path=/; max-age=3600`;
+
             setTimeout(() => {
                 event.target.closest(".producto").remove()
+                if (productosCarritoCookie.length == 0) {
+                    document.querySelector(".carrito .mensaje").classList.remove("display-none");
+                    document.querySelector(".carrito .info-carrito").classList.add("display-none");
+                }
             }, 700);
+            actualizarInfoCesta(productosCarritoCookie);
         }
         if (event.target.type === "number") {
             event.preventDefault();
@@ -92,12 +123,12 @@ window.addEventListener("load", () => {
             });
 
             document.cookie = `productosCarrito=${encodeURIComponent(JSON.stringify(productosCarritoCookie))}; path=/; max-age=3600`;
+            actualizarInfoCesta(productosCarritoCookie);
         }
-
     });
-});
+}
 
-
+//Plantillas y funcionalidades
 const getCookie = (name) => {
     const cookies = document.cookie.split("; ");
     for (let cookie of cookies) {
@@ -118,4 +149,23 @@ const productoCestaPlantilla = (talla, idProducto, img, nombre, max, precio, can
                 </div>
                 <i class="fa-regular fa-trash-can" data-id="${idProducto}" data-talla="${talla}"></i>
             </div>`;
+}
+async function comprobarSesion() {
+    let respuesta = await fetch("./verificarSesionIniciada.php");
+    let data = await respuesta.json();
+    if (!data.loggedIn) {
+        window.location.href = "login.php";
+        return false;
+    }
+    return data.user;
+}
+function actualizarInfoCesta(productos) {
+    const total = productos.reduce((totalCesta, producto) => { 
+        return totalCesta + (parseFloat(producto.precio) * producto.cantidad);
+    }, 0).toFixed(2);
+    document.getElementById("total").innerText = total;
+    const unidades = productos.reduce((numProductos, producto) =>{
+        return numProductos + producto.cantidad;
+    },0);
+    document.getElementById("unidades").innerText = unidades;
 }

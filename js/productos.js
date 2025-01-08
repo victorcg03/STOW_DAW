@@ -1,4 +1,9 @@
 window.addEventListener('load', () => {
+    habilitarCarrouseles();
+    habilitarLikes();
+    habilitarBotonesCompra();
+});
+function habilitarCarrouseles(){
     document.querySelectorAll(".fa-angle-right").forEach(rightArrow => {
         const leftArrow = rightArrow.closest(".imagenes").querySelector(".fa-angle-left");
         const carrousel = rightArrow.closest(".imagenes").querySelector(".carrousel");
@@ -22,6 +27,8 @@ window.addEventListener('load', () => {
             carrousel.style.transform = `translateX(-${currentIndex * 100}%)`;
         });
     });
+}
+function habilitarLikes(){
     document.querySelectorAll(".producto .fa-regular.fa-heart").forEach(corazon => corazon.addEventListener("click", async () => {
 
 
@@ -50,10 +57,13 @@ window.addEventListener('load', () => {
                 console.error("Error guardando el like:", error);
             });
     }));
-
+}
+function habilitarBotonesCompra(){
     document.querySelectorAll(".producto .anadirCesta").forEach(botonAnadir =>
         botonAnadir.addEventListener("click", async () => {
             if (await comprobarSesion()) {
+                document.querySelector(".carrito .mensaje").classList.add("display-none");
+                document.querySelector(".carrito .info-carrito").classList.remove("display-none");
                 const cookie = getCookie("productosCarrito");
                 let productosCarritoCookie = cookie ? JSON.parse(cookie) : [];
                 const producto = botonAnadir.closest(".producto");
@@ -61,7 +71,7 @@ window.addEventListener('load', () => {
                 const stock = producto.querySelector(`.tallaProducto > option[value="${talla}"]`).dataset.stock;
                 const id = producto.dataset.id;
 
-                const inputSelector = `.carrito .producto[data-talla="${talla}"][data-id="${id}"] input`;
+                const inputSelector = `#carrito .producto[data-talla="${talla}"][data-id="${id}"] input`;
                 const input = document.querySelector(inputSelector);
                 const productoEncontrado = productosCarritoCookie.find(producto => producto.idProducto == id && producto.talla == talla);
 
@@ -88,22 +98,12 @@ window.addEventListener('load', () => {
                     };
                     productosCarritoCookie.push(productoCookie);
 
-                    document.querySelector(".carrito").innerHTML += productoCestaPlantilla(talla, id, img, nombre, stock, precio, 1);
+                    document.querySelector("#carrito").innerHTML += productoCestaPlantilla(talla, id, img, nombre, stock, precio, 1);
                 }
 
                 document.cookie = `productosCarrito=${encodeURIComponent(JSON.stringify(productosCarritoCookie))}; path=/; max-age=3600`;
                 document.querySelector(".carrito").classList.add("visible");
+                actualizarInfoCesta(productosCarritoCookie);
             }
-        }));
-
-    async function comprobarSesion() {
-        let respuesta = await fetch("./verificarSesionIniciada.php");
-        let data = await respuesta.json();
-        if (!data.loggedIn) {
-            window.location.href = "login.php";
-            return false;
-        }
-        return data.user;
-    }
-});
-
+    }));
+}
