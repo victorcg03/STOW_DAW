@@ -18,7 +18,7 @@ require_once "./database.php";
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
-                pageLanguage: 'en',
+                pageLanguage: 'es',
                 includedLanguages: 'en,es,fr,de,it'
             }, 'google_translate_element');
         }
@@ -78,7 +78,7 @@ require_once "./database.php";
             </ul>
         </div>
         <div class="carrito menu">
-        
+
         </div>
         <div class="busqueda menu">
             <form action="./productos" method="GET">
@@ -93,11 +93,14 @@ require_once "./database.php";
             if (empty($_SESSION['user'])) { ?>
                 <div>
                     <a href="./login">Iniciar sesión</a>
-                    <p>o</p>
+                    <br>
+                    ó
+                    <br>
                     <a href="./register">Registrarse</a>
                 </div>
             <?php  } else { ?>
                 <div class="user">
+                    <a href="./likes">Ver likes</a>
                     <a href="./logout">Cerrar sesión</a>
                 </div>
             <?php }

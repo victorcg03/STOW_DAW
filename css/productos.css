@@ -157,6 +157,13 @@ main {
             }
         }
     }
+    #filtros form{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        justify-content: start;
+        flex-direction: row;
+    }
 }
 @media screen and (max-width: 650px) {
     main {

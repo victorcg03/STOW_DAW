@@ -67,7 +67,7 @@ function tieneLike($idProducto)
                 </select>
             </div>
             <div class="filtro">
-                <label for="tipo">Tipo: </label>
+                <label for="tipo">Tipo de prenda: </label>
                 <select name="tipo" id="tipo">
                     <option>Seleccionar</option>
                     <?php
