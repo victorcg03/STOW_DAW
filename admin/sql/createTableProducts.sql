@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS Productos;
 CREATE TABLE Productos (
     ID VARCHAR(10) PRIMARY KEY,
     Nombre VARCHAR(255),

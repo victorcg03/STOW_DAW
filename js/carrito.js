@@ -85,19 +85,28 @@ function eliminarProducto(e){
     calcularResumen();
 }
 function realizarPedido(){
-    document.cookie = `productosCarrito=; path=/; max-age=3600`;
+    const costes = productosCarritoCookie.reduce((costes, producto) =>{
+        const totalProducto = producto.cantidad * parseFloat(producto.precio);
+        costes.subtotal += totalProducto;
+        costes.iva += totalProducto * 0.21;
+        costes.envio += producto.cantidad * 1.27;
+        return costes;
+    }, {subtotal: 0, envio: 0, iva: 0});
+    //document.cookie = `productosCarrito=; path=/; max-age=3600`;
     const form = document.createElement("form");
     form.method = "POST";
     form.action = "procesarPedido";
-    const inputProductos = document.createElement("input");
-    inputProductos.type = "hidden";
-    inputProductos.name = "productosPedido";
-    inputProductos.value = JSON.stringify(productosCarritoCookie);
-    form.appendChild(inputProductos);
-
+    const datosPedido = {
+        productos: productosCarritoCookie,
+        costes: costes
+    };
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "datosPedido";
+    input.value = JSON.stringify(datosPedido);
+    form.appendChild(input);
     document.body.appendChild(form);
     form.submit();
-
 }
 const getCookie = (name) => {
     const cookies = document.cookie.split("; ");

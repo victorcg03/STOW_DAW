@@ -153,6 +153,10 @@ function tieneLike($idProducto)
         ?>
     </div>
 </main>
+<?php include_once
+    ("./partials/footer.php");
+?>
+
 <!-- 
 <div class="producto">
             <div class="imagenes">

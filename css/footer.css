@@ -1,0 +1,18 @@
+footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  background-color: rgba(33,37,41, 0.85);
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  color: #fff;
+  font-weight: 800;
+}
+footer a{
+  cursor: pointer;
+  text-decoration: underline;
+  color: blueviolets;
+}

@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS Usuarios;
 CREATE TABLE Usuarios  (
     Correo varchar(255) PRIMARY KEY,
     Nombre varchar(255),

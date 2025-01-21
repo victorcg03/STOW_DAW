@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS CuerpoPedidos;
 CREATE TABLE CuerpoPedidos(
     PedidoID VARCHAR(14),
     ProductoID VARCHAR(10),
