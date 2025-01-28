@@ -95,7 +95,7 @@ function realizarPedido(){
     //document.cookie = `productosCarrito=; path=/; max-age=3600`;
     const form = document.createElement("form");
     form.method = "POST";
-    form.action = "procesarPedido";
+    form.action = "pedido";
     const datosPedido = {
         productos: productosCarritoCookie,
         costes: costes

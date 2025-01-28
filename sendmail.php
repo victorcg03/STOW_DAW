@@ -26,19 +26,23 @@ function enviarCorreo($destinatario, $asunto, $mensaje)
         // Login
         $mail->Host = "smtp.ionos.es";
         $mail->Port = 587;
-        $mail->Username = "stow@victorcorral.com";
+        $mail->Username = "hola@megaargonath.com";
         $mail->Password = "P@ssw0rd1234@P@ssw0rd1234@";
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->setFrom('stow@victorcorral.com');
+        $mail->setFrom('hola@megaargonath.com');
         $mail->addAddress($destinatario);
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
         $mail->isHTML(true);
         $mail->Subject = $asunto;
         $mail->Body = $mensaje;
-        $mail->send();
-        echo "ok";
+        if($mail->send()){
+            return true;
+        } else {
+            return false;
+        }
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: " . $e->getMessage();
+        return false;
     }
 }

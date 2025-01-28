@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido recibido</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background-image: url("./img/fondo.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+    }
+
+    .pedido {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #00000092;
+      border-radius: 15px;
+      padding: 25px;
+      font-weight: 700;
+    }
+
+    .producto {
+      display: flex;
+
+      img {
+        width: 90px;
+        object-fit: contain;
+      }
+
+      .detalle {
+        margin-left: 10px;
+        font-size: 1.2em;
+
+        .nombre-producto {
+          font-size: 1.5em;
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="pedido">
+    <h1>¡Gracias por tu pedido!</h1>
+    <p>Recibimos tu pedido y lo estamos procesando. Aquí tienes el detalle del pedido:</p>
+    <div class="producto">
+      <img src="./img/img1.jpg">
+      <div class="detalle">
+        <p class="nombre-producto">Nombre del producto</p>
+        <p class="talla-producto">Talla: XS</p>
+        <p class="precio-producto">Precio unidad: 20.50€</p>
+        <p class="unidades-producto">Unidades: 3</p>
+        <p class="subtotal-producto">Total producto: 61.50€</p>
+      </div>
+    </div>
+    <div class="producto">
+      <img src="./img/img1.jpg">
+      <div class="detalle">
+        <p class="nombre-producto">Nombre del producto</p>
+        <p class="talla-producto">Talla: XS</p>
+        <p class="precio-producto">Precio unidad: 20.50€</p>
+        <p class="unidades-producto">Unidades: 3</p>
+        <p class="subtotal-producto">Total producto: 61.50€</p>
+      </div>
+    </div>
+    <div class="producto">
+      <img src="./img/img1.jpg">
+      <div class="detalle">
+        <p class="nombre-producto">Nombre del producto</p>
+        <p class="talla-producto">Talla: XS</p>
+        <p class="precio-producto">Precio unidad: 20.50€</p>
+        <p class="unidades-producto">Unidades: 3</p>
+        <p class="subtotal-producto">Total producto: 61.50€</p>
+      </div>
+    </div>
+    <p>Subtotal pedido: 3333€</p>
+    <p>IVA: 323€</p>
+    <p>Envio: 80€</p>
+    <p>Total pedido: 184.50€</p>
+  </div>
+
+</body>
+
+</html>

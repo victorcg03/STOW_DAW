@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST["nombre"]) && !empty($
         try {
             if ($statement->execute()) {
                 $_SESSION["user"] = $_POST["correo"];
-                header("Location: verificarCorreo.php");
+                header("Location: verificarCorreo");
             } else {
                 $error = "Ha habido un error al guardar al usuario";
             }

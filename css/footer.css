@@ -10,6 +10,9 @@ footer{
   left: 0px;
   color: #fff;
   font-weight: 800;
+  text-align: center;
+  word-wrap: break-word;
+  text-overflow:clip;
 }
 footer a{
   cursor: pointer;
