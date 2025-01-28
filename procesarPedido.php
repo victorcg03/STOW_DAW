@@ -1,15 +1,17 @@
 <?php
-require_once "./partials/header.php";
 $error = null;
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["datosPedido"]) && !empty($_SESSION["user"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["datosPedido"])) {
+    require_once "./database.php";
     $idPedido = uniqid("P");
     $datosPedido = json_decode($_POST["datosPedido"], true);
     $costes = $datosPedido["costes"];
     $productosPedido = $datosPedido["productos"];
+    $user = $datosPedido["user"];
+    $_POST["datosPedido"] = null;
     try {
         $statementCabecera = $conne->prepare("INSERT INTO CabeceraPedidos VALUES (:idPedido, :correoUsuario, NOW(), :subtotal, :envio, :iva, :total)");
         $statementCabecera->bindParam(":idPedido", $idPedido);
-        $statementCabecera->bindParam(":correoUsuario", $_SESSION["user"]);
+        $statementCabecera->bindParam(":correoUsuario", $user);
         $statementCabecera->bindParam(":subtotal", $costes["subtotal"]);
         $statementCabecera->bindParam(":envio", $costes["envio"]);
         $statementCabecera->bindParam(":iva", $costes["iva"]);
@@ -35,12 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["datosPedido"]) && !em
         $error = "Ha habido un error al crear el pedido en la BBDD: " . $e->getMessage();
     }
     if ($error == null) {
-        $cuerpoMail = mailTemplate($productosPedido, $costes);
+        $mail = mailTemplate($productosPedido, $costes);
         require_once 'sendmail.php';
-        enviarCorreo($_SESSION["user"], "Pedido recibido", $cuerpoMail);
+        enviarCorreo($user, "Pedido " . $idPedido, $mail["html"], $mail["imagenes"]);
+        exit(header("Location: ./confirmacionPedido?idPedido=" . $idPedido));
     }
 } else {
     header("Location: ./");
+    return;
 }
 ?>
 <link rel="stylesheet" href="./css/pedidoProcesado.css">
@@ -51,16 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["datosPedido"]) && !em
             <h1>ERROR</h1>
             <p><?= $error ?><br>Contacte con soporte</p>
         </div>
-    <?php } else { ?>
-        <div class="pedidoProcesado">
-            <h1>Pedido procesado</h1>
-            <p>Gracias por su compra</p>
-            <p>En breve recibirá un correo con los detalles de su pedido</p>
-            <p>El número de pedido es: <?= $idPedido ?></p>
-        </div>
+    <?php }?>
 </main>
 <?php
-    }
     require_once "./partials/footer.php";
 ?>
 
@@ -72,8 +69,8 @@ function mailTemplate($productos, $costes)
     $iva = $costes["iva"];
     $envio = $costes["envio"];
     $total = $subtotal + $iva + $envio;
-
-    return '
+    $infoProds = productosMail($productos);
+    $html = '
         <!DOCTYPE html>
         <html lang="es">
         <head>
@@ -128,35 +125,38 @@ function mailTemplate($productos, $costes)
             <div class="pedido">
                 <h1>¡Gracias por tu pedido!</h1>
                 <p>Recibimos tu pedido y lo estamos procesando. Aquí tienes el detalle del pedido:</p>
-                ' . productosMail($productos) . '
+                ' . $infoProds["html"] . '
                 <div class="totales">
-                    <p>Subtotal pedido: ' . number_format($subtotal, 2) . ' €</p>
-                    <p>IVA: ' . number_format($iva, 2) . ' €</p>
-                    <p>Envío: ' . number_format($envio, 2) . ' €</p>
-                    <p>Total pedido: ' . number_format($total, 2) . ' €</p>
+                    <p>Subtotal pedido: ' . number_format($subtotal, 2) . '€</p>
+                    <p>IVA: ' . number_format($iva, 2) . '€</p>
+                    <p>Envío: ' . number_format($envio, 2) . '€</p>
+                    <p>Total pedido: ' . number_format($total, 2) . '€</p>
                 </div>
             </div>
         </body>
         </html>
     ';
+    return ["html" => $html, "imagenes" => $infoProds["imagenes"]];
 }
 
 function productosMail($productos)
 {
+    $imgs = [];
     $html = '';
     foreach ($productos as $producto) {
+        array_push($imgs, ["src" => "./img/" . $producto["img"], "cid" => $producto["idProducto"]]);
         $html .= '
         <div class="producto">
-            <img src="./img/' . htmlspecialchars($producto["img"]) . '" alt="Producto">
+            <img src=cid:' . $producto["idProducto"] . '>
             <div class="detalle">
                 <p class="nombre-producto">' . htmlspecialchars($producto["nombre"]) . '</p>
                 <p class="talla-producto">Talla: ' . htmlspecialchars($producto["talla"]) . '</p>
                 <p class="unidades-producto">Cantidad: ' . htmlspecialchars($producto["cantidad"]) . '</p>
-                <p class="precio-producto">Precio: ' .$producto["precio"] . ' €</p>
+                <p class="precio-producto">Precio: ' . htmlspecialchars($producto["precio"]) . ' </p>
             </div>
         </div>';
     }
-    return $html;
+    return ["html" => $html,"imagenes" => $imgs];
 }
 
 ?>

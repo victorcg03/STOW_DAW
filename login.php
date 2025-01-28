@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!empty($_SESSION['user'])) {
-    header("Location: ./index.php");
+    header("Location: ./");
     return;
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["correo"]) && !empty($_POST["password"])) {
@@ -14,13 +14,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["correo"]) && !empty($
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         $passwordHash = $data[0]["Contrasena"];
         if (password_verify($_POST["password"], $passwordHash)) {
-            $_SESSION["user"] = $_POST["correo"];
-            header("Location: ./");
+            if($data[0]["Verificado"] !== "True") {
+                header("Location: ./verificarCorreo?correo=" . $_POST["correo"]);
+            } else {
+                $_SESSION["user"] = $_POST["correo"];
+                header("Location: ./");
+            }
         } else {
-            $error = "Contraseña incorrecta";
+            $error = "Credenciales erroneas";
         }
     } else {
-        $error = "Ese correo no pertenece a ningún usuario registrado";
+        $error = "Credenciales erroneas";
     }
 }
 ?>

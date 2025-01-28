@@ -1,7 +1,8 @@
 <?php
+    require_once './admin/env.php';
     $host = "localhost";
-    $user = "root";
-    $password = "";
+    $user = $userBBDD;
+    $password = $bbddPassword;
     $db = "stow";
     $cadenaConexion = "mysql:host=$host;dbname=$db;";
     try {

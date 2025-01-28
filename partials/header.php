@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require_once "./database.php";
 ?>
 <!DOCTYPE html>
@@ -107,9 +109,9 @@ require_once "./database.php";
             <?php  } else { ?>
                 <div class="user">
                     <a href="./likes">Ver likes</a>
+                    <a href="./pedidos">Ver pedidos</a>
                     <a href="./logout">Cerrar sesión</a>
                 </div>
-            <?php }
-            ?>
+            <?php }?>
         </div>
     </header>

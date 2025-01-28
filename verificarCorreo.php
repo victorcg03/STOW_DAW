@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if (isset($_SESSION['user'])) {
+        header('Location: ./login');
+        return;
+    }
     $correoUsuario;
     require_once "./database.php";
     if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["codigo"])) {
@@ -19,14 +23,15 @@
             $error = "El código no es correcto";
         }
     } else {
-        $correoUsuario = $_SESSION["user"];
-        $_SESSION["user"] = null;
+        $correoUsuario = $_GET["correo"];
+        session_destroy();
         $statement = $conne->prepare("SELECT * FROM usuarios WHERE LOWER(Correo) = LOWER(:correo) LIMIT 1");
         $statement->bindParam(":correo", $correoUsuario);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         $verificado = $data[0]["Verificado"];
         if ($verificado == "True") {
+            session_start();
             $_SESSION['user'] = $correoUsuario;
             header("Location: ./");
         } else {

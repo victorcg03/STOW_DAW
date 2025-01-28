@@ -4,8 +4,8 @@ body{
   background-position: center;
 }
 main{
-  position: relative;
   padding-top: 60px;
+  position: relative;
 }
 .error, .pedidoProcesado{
   text-align: center;

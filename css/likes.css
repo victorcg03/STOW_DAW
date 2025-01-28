@@ -1,7 +1,5 @@
 main {
-  margin-top: 60px;
-  z-index: -1;
-  padding: 55px 10px;
+  padding: 85px 10px;
   display: flex;
   flex-direction: column;
 }

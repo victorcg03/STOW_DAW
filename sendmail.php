@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-function enviarCorreo($destinatario, $asunto, $mensaje)
+function enviarCorreo($destinatario, $asunto, $mensaje, $imagenes = [])
 {
     /*Clase para tratar con excepciones y errores*/
     require './PHPMailer/src/Exception.php';
@@ -12,6 +12,7 @@ function enviarCorreo($destinatario, $asunto, $mensaje)
     require './PHPMailer/src/PHPMailer.php';
     /*Clase SMTP necesaria para la conexión con un servidor SMTP*/
     require './PHPMailer/src/SMTP.php';
+    require './admin/env.php';
     $debug = false;
     try {
         // Crear instancia de la clase PHPMailer
@@ -27,16 +28,20 @@ function enviarCorreo($destinatario, $asunto, $mensaje)
         $mail->Host = "smtp.ionos.es";
         $mail->Port = 587;
         $mail->Username = "hola@megaargonath.com";
-        $mail->Password = "P@ssw0rd1234@P@ssw0rd1234@";
+        $mail->Password = $mailPassword;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->setFrom('hola@megaargonath.com');
         $mail->addAddress($destinatario);
+
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
         $mail->isHTML(true);
         $mail->Subject = $asunto;
         $mail->Body = $mensaje;
-        if($mail->send()){
+        foreach ($imagenes as $imagen) {
+            $mail->addEmbeddedImage($imagen["src"], $imagen["cid"]);
+        }
+        if ($mail->send()) {
             return true;
         } else {
             return false;

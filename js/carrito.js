@@ -84,7 +84,8 @@ function eliminarProducto(e){
     document.cookie = `productosCarrito=${encodeURIComponent(JSON.stringify(productosCarritoCookie))}; path=/; max-age=3600`;
     calcularResumen();
 }
-function realizarPedido(){
+async function realizarPedido(){
+    const {user} = await (await fetch("./verificarSesionIniciada.php")).json();
     const costes = productosCarritoCookie.reduce((costes, producto) =>{
         const totalProducto = producto.cantidad * parseFloat(producto.precio);
         costes.subtotal += totalProducto;
@@ -92,13 +93,14 @@ function realizarPedido(){
         costes.envio += producto.cantidad * 1.27;
         return costes;
     }, {subtotal: 0, envio: 0, iva: 0});
-    //document.cookie = `productosCarrito=; path=/; max-age=3600`;
+    document.cookie = `productosCarrito=; path=/; max-age=3600`;
     const form = document.createElement("form");
     form.method = "POST";
-    form.action = "pedido";
+    form.action = "procesarPedido";
     const datosPedido = {
         productos: productosCarritoCookie,
-        costes: costes
+        costes: costes,
+        user : user
     };
     const input = document.createElement("input");
     input.type = "hidden";

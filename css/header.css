@@ -182,9 +182,14 @@ header{
 .usuario{
     text-align: center;
     font-size: 2.6em;
-    display: flex;
     justify-content: center;
+    display: flex;
     align-items: center;
+    .user{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 }
 .carrito{
     overflow-y: auto;

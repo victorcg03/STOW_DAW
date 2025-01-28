@@ -1,4 +1,11 @@
-<?php require "./partials/header.php"; ?>
+<?php 
+session_start();
+if (!isset($_SESSION['user'])) {
+  header('Location: ./login');
+  return;
+}
+require "./partials/header.php"; 
+?>
 <main>
   <h1>Productos guardados:</h1>
   <?php
@@ -53,3 +60,5 @@
     <?php  } ?>
   </div>
 </main>
+
+<?php require "./partials/footer.php"; ?>

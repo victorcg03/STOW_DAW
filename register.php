@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!empty($_SESSION['user'])) {
-    header("Location: ./index.php");
+    header("Location: ./");
     return;
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST["nombre"]) && !empty($_POST["apellidos"]) && !empty($_POST["correo"]) && !empty($_POST["nombre"]) && !empty($_POST["password"])) {
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST["nombre"]) && !empty($
         try {
             if ($statement->execute()) {
                 $_SESSION["user"] = $_POST["correo"];
-                header("Location: verificarCorreo");
+                header("Location: ./verificarCorreo");
             } else {
                 $error = "Ha habido un error al guardar al usuario";
             }
