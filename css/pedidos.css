@@ -87,3 +87,13 @@ details > div{
     justify-content: center;
   }
 }
+.verProductos{
+  display: block;
+  width: 100%;
+  font-size: 1.1em;
+  color: red;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: underline;
+}

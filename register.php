@@ -4,7 +4,7 @@ if (!empty($_SESSION['user'])) {
     header("Location: ./");
     return;
 }
-if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST["nombre"]) && !empty($_POST["apellidos"]) && !empty($_POST["correo"]) && !empty($_POST["nombre"]) && !empty($_POST["password"])) {
+if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST["nombre"]) && !empty($_POST["apellidos"]) && !empty($_POST["correo"]) && !empty($_POST["password"])) {
     require_once "./database.php";
     $statement = $conne->prepare("SELECT * FROM usuarios WHERE LOWER(Correo) = LOWER(:correo) LIMIT 1");
     $statement->bindParam(":correo", $_POST["correo"]);
@@ -22,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && !empty($_POST["nombre"]) && !empty($
         $statement->bindParam(":password", $passwordHash);
         try {
             if ($statement->execute()) {
-                $_SESSION["user"] = $_POST["correo"];
-                header("Location: ./verificarCorreo");
+                header("Location: ./verificarCorreo?correo=" . $_POST["correo"]);
             } else {
                 $error = "Ha habido un error al guardar al usuario";
             }

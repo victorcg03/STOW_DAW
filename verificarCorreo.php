@@ -24,7 +24,6 @@
         }
     } else {
         $correoUsuario = $_GET["correo"];
-        session_destroy();
         $statement = $conne->prepare("SELECT * FROM usuarios WHERE LOWER(Correo) = LOWER(:correo) LIMIT 1");
         $statement->bindParam(":correo", $correoUsuario);
         $statement->execute();
