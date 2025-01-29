@@ -38,7 +38,7 @@ details > div{
   background-color: rgba(33, 37, 41, 0.85);
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr 8fr;
+  grid-template-columns: 90px auto;
   grid-template-rows: 180px;
   flex-direction: column;
   position: relative;
@@ -96,4 +96,10 @@ details > div{
   text-align: center;
   cursor: pointer;
   text-decoration: underline;
+}
+
+@media screen and (max-width:900px) {
+  .detalle{
+    font-size: 0.9em !important;
+  }
 }
