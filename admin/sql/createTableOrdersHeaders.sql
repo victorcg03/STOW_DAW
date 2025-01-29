@@ -6,6 +6,7 @@ CREATE TABLE CabeceraPedidos(
     EnvioPedido DECIMAL(10,2),
     IvaPedido DECIMAL(10,2),
     TotalPedido DECIMAL(10,2),
+    Completado BOOLEAN,
     PRIMARY KEY (`PedidoID`, `CorreoUsuario`),
     FOREIGN KEY (CorreoUsuario) REFERENCES usuarios(correo)
 )

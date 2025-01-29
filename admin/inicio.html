@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADMIN - Página de inicio</title>
+  <link rel="stylesheet" href="./css/inicio.css">
+  <script src="./js/inicio.js"></script>
+</head>
+
+<body>
+  <header>
+    <a href="./php/logout.php">Cerrar Sesión</a>
+  </header>
+  <main>
+    <h1>Bienvenido a la página de inicio</h1>
+    <div class="gestion">
+      <div class="botones ver">
+        <button data-completados="false">Ver pedidos no completados</button>
+        <button data-completados="true">Ver pedidos completados</button>
+        <button data-completados="null">Ver todos los pedidos</button>
+      </div>
+      <div class="pedidos">
+  
+      </div>
+      <div class="botones imprimir">
+        <button id="imprimirNoCompletados">Imprimir pedidos no completados</button>
+        <button id="imprimirCompletados">Imprimir pedidos completados</button>
+        <button id="imprimirTodos">Imprimir todos los pedidos</button>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

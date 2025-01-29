@@ -1,0 +1,97 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+body{
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #202b38;
+  flex-direction: column;
+}
+h1{
+  color: #fff;
+  margin-bottom: 30px;
+}
+form{
+  width: 390px;
+  padding: 10px;
+  background-color: #00000035;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.form-row{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30% auto;
+  padding: 7px;
+  gap: 20px;
+  width: 100%;
+  label{
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2em;
+  }
+  input{
+    width: 100%;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid #202b38;
+    padding: 9px;
+    color: #fff;
+    font-weight: 700;
+    padding-left: 6px;
+  }
+}
+button{
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid #202b38;
+  padding: 9px;
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+button:hover{
+  background-color: #202b38;
+} 
+.mensaje{
+  width: 320px;
+  height: 90px;
+  border-radius: 5px;
+  background-color: #00000035;
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+}
+.invisible{
+  display: none;
+}
+.visible{
+  display: flex !important;
+  animation: moverMensaje 2s;
+}
+@keyframes moverMensaje {
+  from{
+    top: 130px;
+  }
+  to{
+    top: 20px;
+  }
+}
