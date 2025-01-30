@@ -1,5 +1,5 @@
 <?php
-    require_once './admin/env.php';
+    require_once '../env.php';
     $host = "localhost";
     $user = $userBBDD;
     $password = $bbddPassword;
