@@ -12,7 +12,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Deploy Web 1 (stow.victorcorral.com)
+      - name: Deploy Web on Server (stow.victorcorral.com)
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
