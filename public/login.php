@@ -6,9 +6,13 @@ if (!empty($_SESSION['user'])) {
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["correo"]) && !empty($_POST["password"])) {
     require_once "./database.php";
-    $statement = $conne->prepare("SELECT * FROM usuarios WHERE LOWER(Correo) = LOWER(:correo) LIMIT 1");
+    $statement = $conne->prepare("SELECT * FROM Usuarios WHERE LOWER(Correo) = LOWER(:correo) LIMIT 1");
     $statement->bindParam(":correo", $_POST["correo"]);
-    $statement->execute();
+    try{
+        $statement->execute();
+    }catch(PDOException $e){
+        echo "Error: " . $e->getMessage();
+    }
 
     if($statement->rowCount() != 0) {
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
