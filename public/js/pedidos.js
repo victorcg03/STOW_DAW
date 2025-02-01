@@ -31,34 +31,5 @@ function habilitarCarrouseles() {
             }
             moveCarrousel();
         });
-
-        // Eventos de deslizamiento táctil
-        carrousel.addEventListener("touchstart", (e) => {
-            touchStartX = e.touches[0].clientX; // Almacenar la posición inicial
-            alert("a");
-            
-        });
-
-        carrousel.addEventListener("touchmove", (e) => {
-            touchEndX = e.touches[0].clientX; // Almacenar la posición del toque en movimiento
-        });
-
-        carrousel.addEventListener("touchend", () => {
-            if (touchStartX - touchEndX > 50) { // Si se deslizó hacia la izquierda
-                if (currentIndex < images.length - 1) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0;
-                }
-                moveCarrousel();
-            } else if (touchEndX - touchStartX > 50) { // Si se deslizó hacia la derecha
-                if (currentIndex > 0) {
-                    currentIndex--;
-                } else {
-                    currentIndex = images.length - 1;
-                }
-                moveCarrousel();
-            }
-        });
     });
 }
