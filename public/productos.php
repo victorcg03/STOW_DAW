@@ -1,31 +1,34 @@
 <?php
 include_once("./partials/header.php");
-
-if (!empty($_GET['tipo'])) {
-    $statement = $conne->prepare("SELECT * FROM Productos WHERE LOWER(Sexo) = LOWER(:sexo) AND LOWER(ClaseProducto) = LOWER(:tipo)");
-    $statement->bindParam(":sexo", $_GET["sexo"]);
-    $statement->bindParam(":tipo", $_GET["tipo"]);
-    $statement->execute();
-    $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
-} else if (!empty($_GET['sexo'])) {
-    $statement = $conne->prepare("SELECT * FROM Productos WHERE Sexo = :sexo");
-    $statement->bindParam(":sexo", $_GET["sexo"]);
-    $statement->execute();
-    $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
-} else if (!empty($_GET['search'])) {
-    $response = file_get_contents("http://localhost/search.php?search=" . urlencode($_GET['search']));
-    $productos = json_decode($response, true);
-} else {
-    $statement = $conne->prepare("SELECT * FROM productos");
-    $statement->execute();
-    $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
-}
-$likedProductIds = [];
-if (!empty($_SESSION["user"])) {
-    $statement = $conne->prepare("SELECT ProductoID FROM Likes WHERE Usuario = :usuario");
-    $statement->bindParam(":usuario", $_SESSION["user"]);
-    $statement->execute();
-    $likedProductIds = $statement->fetchAll(PDO::FETCH_COLUMN);
+try {
+    if (!empty($_GET['tipo'])) {
+        $statement = $conne->prepare("SELECT * FROM Productos WHERE LOWER(Sexo) = LOWER(:sexo) AND LOWER(ClaseProducto) = LOWER(:tipo)");
+        $statement->bindParam(":sexo", $_GET["sexo"]);
+        $statement->bindParam(":tipo", $_GET["tipo"]);
+        $statement->execute();
+        $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } else if (!empty($_GET['sexo'])) {
+        $statement = $conne->prepare("SELECT * FROM Productos WHERE Sexo = :sexo");
+        $statement->bindParam(":sexo", $_GET["sexo"]);
+        $statement->execute();
+        $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } else if (!empty($_GET['search'])) {
+        $response = file_get_contents("http://localhost/search.php?search=" . urlencode($_GET['search']));
+        $productos = json_decode($response, true);
+    } else {
+        $statement = $conne->prepare("SELECT * FROM productos");
+        $statement->execute();
+        $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    $likedProductIds = [];
+    if (!empty($_SESSION["user"])) {
+        $statement = $conne->prepare("SELECT ProductoID FROM Likes WHERE Usuario = :usuario");
+        $statement->bindParam(":usuario", $_SESSION["user"]);
+        $statement->execute();
+        $likedProductIds = $statement->fetchAll(PDO::FETCH_COLUMN);
+    }
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
 function tieneLike($idProducto)
 {
@@ -58,11 +61,11 @@ function tieneLike($idProducto)
                 <select name="color" id="color">
                     <option>Seleccionar</option>
                     <?php
-                        $colores = array_unique(array_column($productos, 'Color'));
-                        sort($colores);
-                        foreach ($colores as $color) { ?>
-                            <option value="<?= $color ?>"><?=$color?></option>
-                <?php   }
+                    $colores = array_unique(array_column($productos, 'Color'));
+                    sort($colores);
+                    foreach ($colores as $color) { ?>
+                        <option value="<?= $color ?>"><?= $color ?></option>
+                    <?php   }
                     ?>
                 </select>
             </div>
@@ -71,11 +74,11 @@ function tieneLike($idProducto)
                 <select name="tipo" id="tipo">
                     <option>Seleccionar</option>
                     <?php
-                        $tipos = array_unique(array_column($productos, 'ClaseProducto'));
-                        sort($tipos);
-                        foreach ($tipos as $tipo) { ?>
-                            <option value="<?= $tipo ?>"><?= $tipo ?></option>
-                <?php   }
+                    $tipos = array_unique(array_column($productos, 'ClaseProducto'));
+                    sort($tipos);
+                    foreach ($tipos as $tipo) { ?>
+                        <option value="<?= $tipo ?>"><?= $tipo ?></option>
+                    <?php   }
                     ?>
                 </select>
             </div>
@@ -84,26 +87,26 @@ function tieneLike($idProducto)
                 <select name="talla" id="talla">
                     <option>Seleccionar</option>
                     <?php
-                        $tallasDisponibles = [];
-                        foreach ($productos as $producto) {
-                            $stock = $producto['Stock'];
-                            
-                            $pares = explode(', ', $stock);
-                            
-                            foreach ($pares as $par) {
-                                list($talla, $cantidad) = explode(':', $par);
-                                if ((int)$cantidad > 0) {
-                                    $tallasDisponibles[] = $talla;
-                                }
+                    $tallasDisponibles = [];
+                    foreach ($productos as $producto) {
+                        $stock = $producto['Stock'];
+
+                        $pares = explode(', ', $stock);
+
+                        foreach ($pares as $par) {
+                            list($talla, $cantidad) = explode(':', $par);
+                            if ((int)$cantidad > 0) {
+                                $tallasDisponibles[] = $talla;
                             }
                         }
-                        $ordenTallas = ['XS', 'S', 'M', 'L', 'XL'];
-                        usort($tallasDisponibles, function($a, $b) use ($ordenTallas) {
-                            return array_search($a, $ordenTallas) - array_search($b, $ordenTallas);
-                        });
-                        foreach (array_unique($tallasDisponibles) as $talla) { ?>
-                            <option value="<?= $talla ?>"><?= $talla ?></option>
-                        <?php }
+                    }
+                    $ordenTallas = ['XS', 'S', 'M', 'L', 'XL'];
+                    usort($tallasDisponibles, function ($a, $b) use ($ordenTallas) {
+                        return array_search($a, $ordenTallas) - array_search($b, $ordenTallas);
+                    });
+                    foreach (array_unique($tallasDisponibles) as $talla) { ?>
+                        <option value="<?= $talla ?>"><?= $talla ?></option>
+                    <?php }
                     ?>
                 </select>
             </div>
@@ -153,8 +156,7 @@ function tieneLike($idProducto)
         ?>
     </div>
 </main>
-<?php include_once
-    ("./partials/footer.php");
+<?php include_once("./partials/footer.php");
 ?>
 
 <!-- 
