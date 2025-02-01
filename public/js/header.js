@@ -55,7 +55,13 @@ function habilitarSearch(){
     search.addEventListener("input", async () => {
         if (search.value.length > 0) {
             try {
-                let response = await fetch(`./search.php?search=${search.value}`);
+                let response = await fetch(`./search.php?search=${search.value}`, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                }
+                );
                 if (!response.ok) {
                     console.error("Error en la respuesta del servidor", response.status);
                     return;

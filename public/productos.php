@@ -1,5 +1,5 @@
 <?php
-include_once("./partials/header.php");
+require_once("./partials/header.php");
 try {
     if (!empty($_GET['tipo'])) {
         $statement = $conne->prepare("SELECT * FROM Productos WHERE LOWER(Sexo) = LOWER(:sexo) AND LOWER(ClaseProducto) = LOWER(:tipo)");
@@ -13,8 +13,7 @@ try {
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
     } else if (!empty($_GET['search'])) {
-        $response = file_get_contents("https://stow.victorcorral.com/search?search=" . urlencode($_GET['search']));
-        $productos = json_decode($response, true);
+        require_once "./search.php";
     } else {
         $statement = $conne->prepare("SELECT * FROM Productos");
         $statement->execute();
@@ -42,7 +41,7 @@ function tieneLike($idProducto)
     <div class="barra-busqueda">
         <p>Buscar: </p>
         <form action="./productos">
-            <input type="text" name="search" placeholder="Sudadera blanca...">
+            <input type="text" name="search" placeholder="Sudadera blanca..." value="<?= !empty($_GET['search']) ? $_GET['search'] : "" ?>">
         </form>
     </div>
     <p class="productos-encontrados">Productos encontrados: <?= count($productos) ?></p>
