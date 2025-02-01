@@ -24,12 +24,14 @@ summary{
   cursor: pointer;
 }
 details > div{
+  max-height: 50vh;
   padding: 9px;
   color:#fff;
   font-weight: 800;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  overflow-y: auto;
 }
 .producto {
   width: 100%;
