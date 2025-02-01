@@ -55,7 +55,7 @@ async function imprimirPedidos(e) {
 
           // Crear enlace para descargar el archivo
           const enlace = document.createElement("a");
-          enlace.href = data.ruta.replace("../", "./admin/");
+          enlace.href = data.ruta.replace("../", "./");
           enlace.download = data.nombre;
           document.body.appendChild(enlace);
           enlace.click();

@@ -1,5 +1,5 @@
 comprobarSession();
-import { error } from './utils.js';
+import { mensajePop } from './utils.js';
 window.addEventListener('load', function() {
   const formulario = document.querySelector('form');
   formulario.addEventListener('submit', async function(event) {
