@@ -1,0 +1,67 @@
+    <div id="filtros">
+        <form action="./productos">
+            <input type="text" name="search" hidden value="<?= !empty($_GET["search"]) ? $_GET["search"] : "" ?>">
+            <div class="filtro">
+                <label for="sexo">Sexo: </label>
+                <select name="sexo" id="sexo">
+                    <option>Seleccionar</option>
+                    <option value="hombre">Hombre</option>
+                    <option value="mujer">Mujer</option>
+                </select>
+            </div>
+            <div class="filtro">
+                <label for="color">Color: </label>
+                <select name="color" id="color">
+                    <option>Seleccionar</option>
+                    <?php
+                    $colores = array_unique(array_column($productos, 'Color'));
+                    sort($colores);
+                    foreach ($colores as $color) { ?>
+                        <option value="<?= $color ?>"><?= $color ?></option>
+                    <?php   }
+                    ?>
+                </select>
+            </div>
+            <div class="filtro">
+                <label for="tipo">Tipo de prenda: </label>
+                <select name="tipo" id="tipo">
+                    <option>Seleccionar</option>
+                    <?php
+                    $tipos = array_unique(array_column($productos, 'ClaseProducto'));
+                    sort($tipos);
+                    foreach ($tipos as $tipo) { ?>
+                        <option value="<?= $tipo ?>"><?= $tipo ?></option>
+                    <?php   }
+                    ?>
+                </select>
+            </div>
+            <div class="filtro">
+                <label for="talla">Talla: </label>
+                <select name="talla" id="talla">
+                    <option>Seleccionar</option>
+                    <?php
+                    $tallasDisponibles = [];
+                    foreach ($productos as $producto) {
+                        $stock = $producto['Stock'];
+
+                        $pares = explode(', ', $stock);
+
+                        foreach ($pares as $par) {
+                            list($talla, $cantidad) = explode(':', $par);
+                            if ((int)$cantidad > 0) {
+                                $tallasDisponibles[] = $talla;
+                            }
+                        }
+                    }
+                    $ordenTallas = ['XS', 'S', 'M', 'L', 'XL'];
+                    usort($tallasDisponibles, function ($a, $b) use ($ordenTallas) {
+                        return array_search($a, $ordenTallas) - array_search($b, $ordenTallas);
+                    });
+                    foreach (array_unique($tallasDisponibles) as $talla) { ?>
+                        <option value="<?= $talla ?>"><?= $talla ?></option>
+                    <?php }
+                    ?>
+                </select>
+            </div>
+        </form>
+    </div>
