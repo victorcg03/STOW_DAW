@@ -16,7 +16,7 @@ try {
         $response = file_get_contents("http://localhost/search.php?search=" . urlencode($_GET['search']));
         $productos = json_decode($response, true);
     } else {
-        $statement = $conne->prepare("SELECT * FROM productos");
+        $statement = $conne->prepare("SELECT * FROM Productos");
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
     }

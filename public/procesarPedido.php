@@ -20,11 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["datosPedido"])) {
         if ($statementCabecera->execute()) {
             $statementDetalle = $conne->prepare("INSERT INTO cuerpopedidos VALUES (:idPedido, :idProducto, :talla, :cantidad, :precio)");
             foreach ($productosPedido as $producto) {
+                $precio = floatval(str_replace('€', '', $producto["precio"]));
                 $statementDetalle->bindParam(":idPedido", $idPedido);
                 $statementDetalle->bindParam(":idProducto", $producto["idProducto"]);
                 $statementDetalle->bindParam(":talla", $producto["talla"]);
                 $statementDetalle->bindParam(":cantidad", $producto["cantidad"]);
-                $statementDetalle->bindParam(":precio", $producto["precio"]);
+                $statementDetalle->bindParam(":precio", $precio);
                 if (!$statementDetalle->execute()) {
                     $error = "Ha habido un error al crear el detalle del pedido en la BBDD";
                     break;
