@@ -37,22 +37,36 @@ async function cambiarEstado(e) {
 }
 async function imprimirPedidos(e) {
   const pedidos = await obtenerPedidos(e.target.dataset.completados);
-  const res = await fetch("./php/generarArchivo.php?pedidos=" + JSON.stringify(pedidos));
-  const data = await res.json();
-  if (data.error) {
-    mensajePop(data.msg, true);
-    return;
+  const res = await fetch("./php/generarArchivo.php?pedidos=" + encodeURIComponent(JSON.stringify(pedidos)));
+
+  if (!res.ok) {
+      mensajePop("Error en el servidor", true);
+      return;
   }
-  mensajePop(data.msg, false);
-  console.log(data.ruta);
-  console.log(data.nombre);
-  const enlace = document.createElement("a");
-  enlace.href = data.ruta.replace("../", "./admin/");
-  enlace.download = data.nombre;
-  document.body.appendChild(enlace);
-  enlace.click();
-  document.body.removeChild(enlace);
+
+  const text = await res.text();
+
+  try {
+      const data = JSON.parse(text);
+      if (data.error) {
+          mensajePop(data.error, true);
+      } else {
+          mensajePop(data.msg, false);
+
+          // Crear enlace para descargar el archivo
+          const enlace = document.createElement("a");
+          enlace.href = data.ruta.replace("../", "./admin/");
+          enlace.download = data.nombre;
+          document.body.appendChild(enlace);
+          enlace.click();
+          document.body.removeChild(enlace);
+      }
+  } catch (error) {
+      console.error("Respuesta no es JSON válido:", text);
+      mensajePop("Error inesperado en la respuesta", true);
+  }
 }
+
 async function obtenerPedidos(tipo) {
   const res = await fetch("./php/obtenerPedidos.php?completados=" + tipo);
   const data = await res.json();
