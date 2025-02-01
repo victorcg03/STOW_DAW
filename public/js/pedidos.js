@@ -35,7 +35,7 @@ function habilitarCarrouseles() {
         // Eventos de deslizamiento táctil
         carrousel.addEventListener("touchstart", (e) => {
             touchStartX = e.touches[0].clientX; // Almacenar la posición inicial
-            console.log("gola");
+            alert("a");
             
         });
 
