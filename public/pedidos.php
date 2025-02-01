@@ -24,7 +24,7 @@ $cabecerasPedidos = $statementCabeceras->fetchAll();
     <?php
     foreach ($cabecerasPedidos as $cabeceraPedido) {
       echo "<details>";
-      echo "<summary>Pedido " . $cabeceraPedido["PedidoID"] . "</summary>";
+      echo "<summary>Pedido " . $cabeceraPedido["PedidoID"] . ($cabeceraPedido["Completado"] == "True" ? " - Completado" : " - En curso") . "</summary>";
       echo "<div>";
       echo "<p>Fecha: " . $cabeceraPedido["FechaPedido"] . "</p>";
       echo "<p>Productos:</p>";

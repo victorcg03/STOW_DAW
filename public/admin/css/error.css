@@ -10,9 +10,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: red;
   text-align: center;
   padding: 10px;
+}
+.error{
+  color: red;
+}
+.notificacion{
+  color: rgb(171, 255, 171);
 }
 .invisible{
   display: none;

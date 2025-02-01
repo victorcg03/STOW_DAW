@@ -1,7 +1,10 @@
 <?php
   require_once "comprobarSesionIniciada.php";
-  if ($SESION_INICIADA) {
-    require_once "../../database.php";
+  if (!$SESION_INICIADA) {
+    header("Location: ../../");
+    die();
+  }
+  require_once "../../database.php";
     if (!$conne) {
       echo json_encode(["error" => "No se pudo conectar a la base de datos"]);
       die();
@@ -36,5 +39,4 @@
     }
     echo json_encode(["pedidos" => $pedidos]);
     die();
-  }
 ?>
