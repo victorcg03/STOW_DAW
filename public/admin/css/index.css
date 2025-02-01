@@ -66,32 +66,3 @@ button{
 button:hover{
   background-color: #202b38;
 } 
-.mensaje{
-  width: 320px;
-  height: 90px;
-  border-radius: 5px;
-  background-color: #00000035;
-  position: absolute;
-  top: 90px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: red;
-}
-.invisible{
-  display: none;
-}
-.visible{
-  display: flex !important;
-  animation: moverMensaje 2s;
-}
-@keyframes moverMensaje {
-  from{
-    top: 130px;
-  }
-  to{
-    top: 20px;
-  }
-}

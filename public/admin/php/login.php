@@ -11,7 +11,7 @@
   function verificarDatos(){
     $usuario = $_POST["usuario"];
     $contrasena = $_POST["contrasena"];
-    $nombreArchivo = "../admin.txt";
+    $nombreArchivo = "../../../admin.txt";
     //Controlo que el fichero exista
     if (!file_exists($nombreArchivo)) {
         echo json_encode(["error" => "Error al acceder a los datos"]);
@@ -29,7 +29,7 @@
         $_SESSION["idUsuario"] = $datosAdmin[2];
         echo json_encode(["sesionIniciada" => true]);
       } else {
-        echo json_encode(["error" => "Credenciales incorrectas"]);
+        echo json_encode(["error" => "Credenciales incorrectas",]);
       }
     }
   }

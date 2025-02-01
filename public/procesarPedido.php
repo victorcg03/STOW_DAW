@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["datosPedido"])) {
     $user = $datosPedido["user"];
     $_POST["datosPedido"] = null;
     try {
-        $statementCabecera = $conne->prepare("INSERT INTO CabeceraPedidos VALUES (:idPedido, :correoUsuario, NOW(), :subtotal, :envio, :iva, :total, False)");
+        $statementCabecera = $conne->prepare("INSERT INTO CabeceraPedidos VALUES (:idPedido, :correoUsuario, NOW(), :subtotal, :envio, :iva, :total, 'False')");
         $statementCabecera->bindParam(":idPedido", $idPedido);
         $statementCabecera->bindParam(":correoUsuario", $user);
         $statementCabecera->bindParam(":subtotal", $costes["subtotal"]);

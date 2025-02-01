@@ -1,4 +1,5 @@
 comprobarSession();
+import { error } from './utils.js';
 window.addEventListener('load', function() {
   const formulario = document.querySelector('form');
   formulario.addEventListener('submit', async function(event) {
@@ -24,12 +25,4 @@ async function comprobarSession(){
   if (data.sesionIniciada) {
     window.location.href = 'inicio';
   }
-}
-function error(mensaje){
-  const mensajeBox = document.querySelector('.mensaje');
-  mensajeBox.innerText = mensaje;
-  mensajeBox.classList.add('visible');
-  setTimeout(()=>{
-    mensajeBox.classList.remove('visible');
-  }, 1900)
 }

@@ -1,26 +1,40 @@
 <?php
-  require_once "./comprobarSesionIniciada.php";
+  require_once "comprobarSesionIniciada.php";
   if ($SESION_INICIADA) {
     require_once "../../database.php";
+    if (!$conne) {
+      echo json_encode(["error" => "No se pudo conectar a la base de datos"]);
+      die();
+    } 
     $completados = $_GET["completados"];
     $pedidos = [];
-    if ($completados) {
-      $statementCabecera = $conne -> prepare("SELECT * FROM CabeceraPedidos WHERE completado = :completados");
-      $statementCabecera -> bindParam(":completados", $completados);
-    } else {
-      $statementCabecera = $conne -> prepare("SELECT * FROM CabeceraPedidos");
+    try{
+      if ($completados != 'null') {
+        $statementCabecera = $conne->prepare("SELECT * FROM cabecerapedidos WHERE completado = :completado");
+        $statementCabecera->bindParam(":completado", $completados);
+      } else {
+        $statementCabecera = $conne->prepare("SELECT * FROM cabecerapedidos");
+      }
+      $statementCabecera->execute();
+      $cabecerasPedidos = $statementCabecera->fetchAll(PDO::FETCH_ASSOC);
+      if ($cabecerasPedidos){
+        foreach ($cabecerasPedidos as $cabeceraPedido) {
+          $statementCuerpo = $conne->prepare("SELECT * FROM cuerpopedidos WHERE PedidoID = :PedidoID");
+          $statementCuerpo->bindParam(":PedidoID", $cabeceraPedido["PedidoID"]);
+          $statementCuerpo->execute();
+          $lineasPedido = $statementCuerpo->fetchAll(PDO::FETCH_ASSOC);
+          $pedido = [
+            "cabecera" => $cabeceraPedido,
+            "lineas" => $lineasPedido
+          ];
+          array_push($pedidos, $pedido);
+        }
+      }
+    } catch (Exception $e) {
+      echo json_encode(["error" => true, "msg" => "Error al obtener los pedidos" . $e->getMessage()]);
+      die();
     }
-    $statementCabecera -> execute();
-    $cabeceras = $statementCabecera -> fetchAll(PDO::FETCH_ASSOC);
-    foreach ($cabeceras as $cabecera) {
-      $idPedido = $cabecera["PedidoID"];
-      $statementLineas = $conne -> prepare("SELECT * FROM cuerpopedidos WHERE PedidoID = :idPedido");
-      $statementLineas -> bindParam(":idPedido", $idPedido);
-      $statementLineas -> execute();
-      $lineas = $statementLineas -> fetchAll(PDO::FETCH_ASSOC);
-      $pedido = ["cabecera" => $cabecera, "lineas" => $lineas];
-      array_push($pedido);
-    }
-    echo json_encode($pedidos);
+    echo json_encode(["pedidos" => $pedidos]);
+    die();
   }
 ?>
