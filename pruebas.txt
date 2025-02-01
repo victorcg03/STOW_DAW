@@ -61,7 +61,7 @@
                         <option value="<?= $talla ?>"><?= $talla ?></option>
                     <?php }
                     ?>
-                </select>
+                </select>dgdfg
             </div>
         </form>
     </div>
