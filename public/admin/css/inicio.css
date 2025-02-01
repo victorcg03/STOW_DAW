@@ -40,7 +40,6 @@ h1{
 }
 .gestion{
   height: 100%;
-  background-color: red;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
