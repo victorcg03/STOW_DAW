@@ -38,15 +38,20 @@ async function cambiarEstado(e) {
 async function imprimirPedidos(e) {
   const pedidos = await obtenerPedidos(e.target.dataset.completados);
   const res = await fetch("./php/generarArchivo.php?pedidos=" + JSON.stringify(pedidos));
-  const data = await res.json();  
-  
-  console.log(pedidos);
-  
+  const data = await res.json();
   if (data.error) {
     mensajePop(data.msg, true);
     return;
   }
   mensajePop(data.msg, false);
+  console.log(data.ruta);
+  console.log(data.nombre);
+  const enlace = document.createElement("a");
+  enlace.href = data.ruta.replace("../", "./admin/");
+  enlace.download = data.nombre;
+  document.body.appendChild(enlace);
+  enlace.click();
+  document.body.removeChild(enlace);
 }
 async function obtenerPedidos(tipo) {
   const res = await fetch("./php/obtenerPedidos.php?completados=" + tipo);
