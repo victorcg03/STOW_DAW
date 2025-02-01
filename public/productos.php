@@ -2,13 +2,13 @@
 include_once("./partials/header.php");
 
 if (!empty($_GET['tipo'])) {
-    $statement = $conne->prepare("SELECT * FROM productos WHERE LOWER(Sexo) = LOWER(:sexo) AND LOWER(ClaseProducto) = LOWER(:tipo)");
+    $statement = $conne->prepare("SELECT * FROM Productos WHERE LOWER(Sexo) = LOWER(:sexo) AND LOWER(ClaseProducto) = LOWER(:tipo)");
     $statement->bindParam(":sexo", $_GET["sexo"]);
     $statement->bindParam(":tipo", $_GET["tipo"]);
     $statement->execute();
     $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
 } else if (!empty($_GET['sexo'])) {
-    $statement = $conne->prepare("SELECT * FROM productos WHERE Sexo = :sexo");
+    $statement = $conne->prepare("SELECT * FROM Productos WHERE Sexo = :sexo");
     $statement->bindParam(":sexo", $_GET["sexo"]);
     $statement->execute();
     $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
