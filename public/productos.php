@@ -13,7 +13,7 @@ try {
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
     } else if (!empty($_GET['search'])) {
-        $response = file_get_contents("http://localhost/search.php?search=" . urlencode($_GET['search']));
+        $response = file_get_contents("http://localhost/public/search.php?search=" . urlencode($_GET['search']));
         $productos = json_decode($response, true);
     } else {
         $statement = $conne->prepare("SELECT * FROM Productos");
