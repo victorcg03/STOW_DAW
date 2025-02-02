@@ -1,6 +1,6 @@
 main {
     z-index: -1;
-    padding: 85px 10px;
+    padding: 125px 10px;
     display: flex;
     flex-direction: column;
     .barra-busqueda{
@@ -22,7 +22,6 @@ main {
                 height: 100%;
                 width: 100%;
                 border: 1px solid #000;
-                border-radius: 5px;
                 padding-left: 10px;
                 font-weight: 700;
             }
@@ -42,15 +41,15 @@ main {
         place-items: center;
         color: #fff;
         .producto {
+            cursor: pointer;
             width: 100%;
-            aspect-ratio: 9/16;
-            padding: 5px;
-            border-radius: 5px;
-            background-color: rgba(33, 37, 41, 0.85);
-            display: grid;
-            grid-template-rows: auto auto;
-            flex-direction: column;
+            aspect-ratio: 9/14;
+            border: 1px solid #333;
+            display: flex;
+            justify-content: end;
             position: relative;
+            flex-direction: column;
+            transition: transform 0.3s;
             span{
                 position: absolute;
                 top: 15px;
@@ -87,7 +86,10 @@ main {
                 overflow: hidden;
                 position: relative;
                 border-radius: 4px;
-                
+                top: 0px;
+                left: 0px;
+                height: 100%;
+                position: absolute;
                 i{
                     position: absolute;
                     top: 50%;
@@ -108,52 +110,78 @@ main {
                     flex-wrap: nowrap;
                     transform: translateX(0%);
                     transition: transform 0.5s;
+                    height: 100%;
                     img {
                         width: 100%;
                         z-index:0;
-
+                        object-fit: contain;
+                        object-position:top;
                     }
                 }
             }
+            .detalle-producto{
+                background-color: rgba(0, 0, 0, 0.774);
+                z-index: 100;
+                min-height: 90px;
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+            }
             .info-producto{
-                height: 1fr;
                 display: grid;
-                grid-template-rows: 45px auto auto;
+                grid-template-columns: auto auto;
                 gap: 5px;
+                padding: 5px 5px;
+                width: 100%;
+                height: calc(100% - 35px);
                 .nombre{
                     display: flex;
                     align-items: center;
-                }
-                .comprar{
-                    display: flex;
                     width: 100%;
-                    gap: 5px;
-                    height: 35px;
-                    button{
-                        height: 100%;
-                        width: 80%;
-                        border: 1px solid #fff;
-                        border-radius: 3px;
-                        color: #fff;
-                        cursor: pointer;
-                        font-weight: 800;
-                    }
-                    button:hover{
-                        background-color: rgba(255, 217, 0, 0.452);
-                    }
-                    select{
-                        text-align: center;
-                        width:20%;
-                        height: 100%;
-                        border-radius: 3px;
-                        border: 1px solid #fff;
-                        cursor: pointer;
-                        font-weight: 800;
-                        color: #fff;
-                        background-color: rgba(33, 37, 41, 0.85);
-                    }
+                    word-wrap: break-word;
+                }
+                .precio{
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
                 }
             }
+            .comprar{
+                display: flex;
+                width: 100%;
+                height: 35px;
+                button{
+                    height: 100%;
+                    width: 80%;
+                    border: 1px solid #fff;
+                    color: #fff;
+                    cursor: pointer;
+                    font-weight: 800;
+                    transition: 0.3s;
+                }
+                button:hover{
+                    background-color: rgba(255, 217, 0, 0.452);
+                }
+                select, select:focus{
+                    text-align: center;
+                    width:20%;
+                    height: 100%;
+                    border-radius: 0 !important;
+                    border: 1px solid #fff;
+                    cursor: pointer;
+                    font-weight: 800;
+                    color: #fff;
+                    background-color: transparent;
+                }
+                select:hover{
+                    background-color: rgba(255, 217, 0, 0.452);
+                    color: #000;
+                }
+            }
+        }
+        .producto:hover{
+            border: 2px solid goldenrod;
+            transform: scale(1.01) translateY(-5px);
         }
     }
     #filtros form{

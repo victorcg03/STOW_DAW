@@ -8,7 +8,7 @@
     font-variation-settings:
       "wdth" 100;
     background-color: unset;
-    /* user-select: none !important; */
+    user-select: none !important;
 }
 a{
     color: unset;

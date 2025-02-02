@@ -44,23 +44,24 @@ require "./partials/header.php";
             </div>
             <i class="fa-solid fa-angle-left"></i>
           </div>
-          <div class="info-producto">
-            <p class="nombre"><?= $producto["Nombre"] . "|" . $producto["Sexo"] ?></p>
-            <p class="precio"><?= $producto["Precio"] ?>€</p>
-
-            <div class="comprar">
-              <button class="anadirCesta">Añadir a la cesta</button>
-              <select class="tallaProducto" name="talla">
-                <?php
-                $tallas = explode(",", $producto['Stock']);
-                foreach ($tallas as $talla) {
-                  $partes = explode(":", $talla); ?>
-
-                  <option data-stock="<?= $partes[1] ?>" class="notranslate" value="<?= $partes[0] ?>" <?= $partes[1] == 0 ? "disabled" : "" ?>><?= trim($partes[0]) ?></option>
-                <?php  }
-                ?>
-              </select>
+          <div class="detalle-producto">
+            <div class="info-producto">
+              <p class="nombre"><?= $producto["Nombre"] . "|" . $producto["Sexo"] ?></p>
+              <p class="precio"><?= $producto["Precio"] ?>€</p>
             </div>
+              <div class="comprar">
+                <button class="anadirCesta">Añadir a la cesta</button>
+                <select class="tallaProducto" name="talla">
+                  <?php
+                  $tallas = explode(",", $producto['Stock']);
+                  foreach ($tallas as $talla) {
+                    $partes = explode(":", $talla); ?>
+
+                    <option data-stock="<?= $partes[1] ?>" class="notranslate" value="<?= $partes[0] ?>" <?= $partes[1] == 0 ? "disabled" : "" ?>><?= trim($partes[0]) ?></option>
+                  <?php  }
+                  ?>
+                </select>
+              </div>
           </div>
         </div>
 

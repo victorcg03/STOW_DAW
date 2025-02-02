@@ -36,7 +36,7 @@ function tieneLike($idProducto)
 }
 ?>
 <link rel="stylesheet" href="./css/productos.css">
-<script src="./js/productos.js"></script>
+<script type="module" src="./js/productos.js"></script>
 <main>
     <div class="barra-busqueda">
         <p>Buscar: </p>
@@ -65,10 +65,11 @@ function tieneLike($idProducto)
                     </div>
                     <i class="fa-solid fa-angle-left"></i>
                 </div>
-                <div class="info-producto">
-                    <p class="nombre"><?= $producto["Nombre"] . "|" . $producto["Sexo"] ?></p>
-                    <p class="precio"><?= $producto["Precio"] ?>€</p>
-
+                <div class="detalle-producto">
+                    <div class="info-producto">
+                        <p class="nombre"><?= $producto["Nombre"] . "|" . $producto["Sexo"] ?></p>
+                        <p class="precio"><?= $producto["Precio"] ?>€</p>
+                    </div>
                     <div class="comprar">
                         <button class="anadirCesta">Añadir a la cesta</button>
                         <select class="tallaProducto" name="talla">
