@@ -1,29 +1,63 @@
-export function habilitarCarrouseles(){
-  document.querySelectorAll(".fa-angle-right").forEach(rightArrow => {
-      const leftArrow = rightArrow.closest(".imagenes").querySelector(".fa-angle-left");
-      const carrousel = rightArrow.closest(".imagenes").querySelector(".carrousel");
-      const images = carrousel.querySelectorAll("img");
-      let currentIndex = 0;
+export function habilitarCarrouseles() {
+    document.querySelectorAll(".fa-angle-right").forEach(rightArrow => {
+        const leftArrow = rightArrow.closest(".imagenes")?.querySelector(".fa-angle-left");
+        const carrousel = rightArrow.closest(".imagenes")?.querySelector(".carrousel");
+        const images = carrousel?.querySelectorAll("img");
+        if (!leftArrow || !carrousel || !images) return;
 
-      rightArrow.addEventListener("click", () => {
-          if (currentIndex < images.length - 1) {
-              currentIndex++;
-          } else {
-              currentIndex = 0;
-          }
-          carrousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-      });
-      leftArrow.addEventListener("click", () => {
-          if (currentIndex > 0) {
-              currentIndex--;
-          } else {
-              currentIndex = images.length - 1;
-          }
-          carrousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-      });
-  });
+        let currentIndex = 0;
+        let startX = 0;
+        let endX = 0;
+
+        function actualizarCarrusel() {
+            carrousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function moverDerecha() {
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            actualizarCarrusel();
+        }
+
+        function moverIzquierda() {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = images.length - 1;
+            }
+            actualizarCarrusel();
+        }
+
+        // Eventos de click y touch para botones
+        rightArrow.addEventListener("click", moverDerecha);
+        rightArrow.addEventListener("touchend", moverDerecha);
+
+        leftArrow.addEventListener("click", moverIzquierda);
+        leftArrow.addEventListener("touchend", moverIzquierda);
+
+        // Eventos de deslizamiento táctil
+        carrousel.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        carrousel.addEventListener("touchend", (e) => {
+            endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) {
+                moverDerecha(); // Desliza hacia la izquierda → siguiente imagen
+            } else if (endX - startX > 50) {
+                moverIzquierda(); // Desliza hacia la derecha → imagen anterior
+            }
+        });
+
+        // Mejora de transiciones en CSS
+        carrousel.style.transition = "transform 0.3s ease-in-out";
+    });
 }
-export function habilitarLikes(){
+
+export function habilitarLikes() {
     document.querySelectorAll(".producto .fa-regular.fa-heart").forEach(corazon => corazon.addEventListener("click", async () => {
         const corazonFondo = corazon.closest(".producto").querySelector(".fa-solid");
         const idProducto = corazon.closest(".producto").dataset.id;
@@ -51,7 +85,7 @@ export function habilitarLikes(){
             });
     }));
 }
-export function habilitarBotonesCompra(){
+export function habilitarBotonesCompra() {
     document.querySelectorAll(".producto .anadirCesta").forEach(botonAnadir =>
         botonAnadir.addEventListener("click", async () => {
             if (await comprobarSesion()) {
@@ -98,5 +132,5 @@ export function habilitarBotonesCompra(){
                 document.querySelector(".carrito").classList.add("visible");
                 actualizarInfoCesta(productosCarritoCookie);
             }
-    }));
+        }));
 }
