@@ -32,10 +32,8 @@ export function habilitarCarrouseles() {
         }
 
         rightArrow.addEventListener("click", moverDerecha);
-        rightArrow.addEventListener("touchend", moverDerecha);
-
+        
         leftArrow.addEventListener("click", moverIzquierda);
-        leftArrow.addEventListener("touchend", moverIzquierda);
 
         images.forEach(img => {
             img.addEventListener("touchstart", (e) => {
