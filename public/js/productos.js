@@ -1,4 +1,4 @@
-import { habilitarCarrouseles, habilitarLikes, habilitarBotonesCompra} from "./utils";
+import { habilitarCarrouseles, habilitarLikes, habilitarBotonesCompra} from "./utils.js";
 window.addEventListener('load', () => {
     habilitarCarrouseles();
     habilitarLikes();
