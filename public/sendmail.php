@@ -7,12 +7,14 @@ use PHPMailer\PHPMailer\SMTP;
 function enviarCorreo($destinatario, $asunto, $mensaje, $imagenes = [])
 {
     /*Clase para tratar con excepciones y errores*/
-    require '../PHPMailer/src/Exception.php';
+    require_once '../PHPMailer/src/Exception.php';
     /*Clase PHPMailer*/
-    require '../PHPMailer/src/PHPMailer.php';
+    require_once '../PHPMailer/src/PHPMailer.php';
     /*Clase SMTP necesaria para la conexión con un servidor SMTP*/
-    require '../PHPMailer/src/SMTP.php';
+    require_once '../PHPMailer/src/SMTP.php';
+
     require '../env.php';
+
     $debug = false;
     try {
         // Crear instancia de la clase PHPMailer
