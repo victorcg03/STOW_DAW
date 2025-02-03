@@ -20,5 +20,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/sitios/STOW_DAW
-            git pull
             date >> /home/victor/deploy.log
+            git pull >> /home/victor/deploy.log
