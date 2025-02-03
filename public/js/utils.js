@@ -31,26 +31,28 @@ export function habilitarCarrouseles() {
             actualizarCarrusel();
         }
 
-        // Eventos de click y touch para botones
         rightArrow.addEventListener("click", moverDerecha);
         rightArrow.addEventListener("touchend", moverDerecha);
 
         leftArrow.addEventListener("click", moverIzquierda);
         leftArrow.addEventListener("touchend", moverIzquierda);
 
-        // Eventos de deslizamiento táctil
-        carrousel.addEventListener("touchstart", (e) => {
-            startX = e.touches[0].clientX;
+        images.forEach(img => {
+            img.addEventListener("touchstart", (e) => {
+                startX = e.touches[0].clientX;
+            });
+
+            img.addEventListener("touchend", (e) => {
+                endX = e.changedTouches[0].clientX;
+                if (startX - endX > 50) {
+                    moverDerecha();
+                } else if (endX - startX > 50) {
+                    moverIzquierda();
+                }
+            });
         });
 
-        carrousel.addEventListener("touchend", (e) => {
-            endX = e.changedTouches[0].clientX;
-            if (startX - endX > 50) {
-                moverDerecha(); // Desliza hacia la izquierda → siguiente imagen
-            } else if (endX - startX > 50) {
-                moverIzquierda(); // Desliza hacia la derecha → imagen anterior
-            }
-        });
+
 
         // Mejora de transiciones en CSS
         carrousel.style.transition = "transform 0.3s ease-in-out";
