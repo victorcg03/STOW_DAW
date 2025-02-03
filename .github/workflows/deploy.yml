@@ -21,3 +21,4 @@ jobs:
           script: |
             cd /var/www/sitios/STOW_DAW
             git pull
+            date >> /home/victor/deploy.log
