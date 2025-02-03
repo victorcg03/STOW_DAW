@@ -53,11 +53,11 @@ $disabled = !empty($user) ? 'readonly' : '';
     </div>
     <div class="form-row">
       <label for="motivo">Motivo de contacto:</label>
-      <input type="text" id="motivo" name="motivo" required>
+      <input type="text" id="motivo" name="motivo" required placeholder="Producto dañado...">
     </div>
     <div class="form-row mensaje">
       <label for="mensaje">Mensaje:</label>
-      <textarea id="mensaje" name="mensaje" required></textarea>
+      <textarea id="mensaje" name="mensaje" required placeholder="El producto..."></textarea>
     </div>
     <button type="submit">Enviar</button>
     <?php if (!empty($noti)): ?>

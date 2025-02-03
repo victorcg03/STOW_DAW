@@ -95,3 +95,11 @@ button:hover{
   text-align: center;
   font-size: 1rem;
 }
+@media screen and (max-width: 768px){
+  form{
+    width: 90%;
+  }
+  .form-row input, textarea{
+    padding: 4px;
+  }
+}
