@@ -13,7 +13,7 @@ async function comprobarSesion() {
     let respuesta = await fetch("./verificarSesionIniciada.php");
     let data = await respuesta.json();
     if (!data.loggedIn) {
-        window.location.href = "login.php";
+        window.location.href = "login";
     }
 }
 function cargarProductos() {

@@ -129,7 +129,7 @@ main {
             }
             .info-producto{
                 display: grid;
-                grid-template-columns: auto auto;
+                grid-template-columns: auto 45px;
                 gap: 5px;
                 padding: 5px 5px;
                 width: 100%;
@@ -141,9 +141,11 @@ main {
                     word-wrap: break-word;
                 }
                 .precio{
+                    width: fit-content;
                     display: flex;
                     align-items: center;
                     width: 100%;
+                    text-align: center;
                 }
             }
             .comprar{
@@ -180,7 +182,7 @@ main {
             }
         }
         .producto:hover{
-            border: 2px solid goldenrod;
+            border: 1px solid goldenrod;
             transform: scale(1.01) translateY(-5px);
         }
     }

@@ -15,7 +15,7 @@ require "./partials/header.php";
   $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
   ?>
   <link rel="stylesheet" href="./css/likes.css">
-  <script src="./js/likes.js"></script>
+  <script type="module" src="./js/likes.js"></script>
   <?php
   if (count($productos) == 0) { ?>
     <div class="noProds">
