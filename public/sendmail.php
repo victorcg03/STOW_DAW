@@ -27,12 +27,12 @@ function enviarCorreo($destinatario, $asunto, $mensaje, $imagenes = [])
         $mail->isSMTP();
         $mail->SMTPAuth = true;
         // Login
-        $mail->Host = "smtp.ionos.es";
-        $mail->Port = 587;
-        $mail->Username = "hola@megaargonath.com";
+        $mail->Host = $mailHost;
+        $mail->Port = $mailPort;
+        $mail->Username = $mailUser;
         $mail->Password = $mailPassword;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->setFrom('hola@megaargonath.com');
+        $mail->setFrom($mailUser);
         $mail->addAddress($destinatario);
 
         $mail->CharSet = 'UTF-8';
