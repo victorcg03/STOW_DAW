@@ -1,5 +1,5 @@
 main{
-  height: 100%;
+  height: calc(100% -120px);
   background-image: url('../img/sudadera2.jpg');
   background-position: center;
   background-size: cover;

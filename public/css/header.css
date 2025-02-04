@@ -85,7 +85,7 @@ header{
     width: 250px;
     padding: 15px 20px;
     height: calc(100dvh - 60px);
-    transform: translateX(-250px);
+    transform: translateX(-450px);
     background-color: rgba(33,37,41, 0.85);
     ul{
         list-style: none;

@@ -17,6 +17,7 @@ require_once "./database.php";
     <script src="https://kit.fontawesome.com/cade5ed75a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({

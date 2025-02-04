@@ -13,7 +13,7 @@ $cabecerasPedidos = $statementCabeceras->fetchAll();
 
 ?>
 <link rel="stylesheet" href="./css/pedidos.css">
-<script src="./js/pedidos.js"></script>
+<script type="module" src="./js/pedidos.js"></script>
 <main>
   <?php
   if (count($cabecerasPedidos) == 0) {
