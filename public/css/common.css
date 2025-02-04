@@ -50,7 +50,6 @@
       .imagenes {
           width: 100%;
           overflow: hidden;
-          position: relative;
           border-radius: 4px;
           top: 0px;
           left: 0px;
@@ -86,6 +85,8 @@
                   z-index:0;
                   object-fit: contain;
                   object-position:top;
+                  display: block;
+                  flex-shrink: 0;
               }
           }
       }
