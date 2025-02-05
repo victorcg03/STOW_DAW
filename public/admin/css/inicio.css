@@ -25,6 +25,7 @@ header{
   font-weight: 800;
   font-size: 1.4em;
   background-color: rgba(0, 0, 0, 0.2);
+  gap: 20px;
   a{
     color: #fff;
   }

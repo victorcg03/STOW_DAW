@@ -2,26 +2,26 @@
 require_once("./partials/header.php");
 try {
     if (!empty($_GET['tipo'])) {
-        $statement = $conne->prepare("SELECT * FROM Productos WHERE LOWER(Sexo) = LOWER(:sexo) AND LOWER(ClaseProducto) = LOWER(:tipo)");
+        $statement = $conne->prepare("SELECT * FROM Productos WHERE LOWER(Sexo) = LOWER(:sexo) AND LOWER(ClaseProducto) = LOWER(:tipo) AND activo = 1");
         $statement->bindParam(":sexo", $_GET["sexo"]);
         $statement->bindParam(":tipo", $_GET["tipo"]);
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
     } else if (!empty($_GET['sexo'])) {
-        $statement = $conne->prepare("SELECT * FROM Productos WHERE Sexo = :sexo");
+        $statement = $conne->prepare("SELECT * FROM Productos WHERE Sexo = :sexo AND activo = 1");
         $statement->bindParam(":sexo", $_GET["sexo"]);
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
     } else if (!empty($_GET['search'])) {
         require_once "./search.php";
     } else {
-        $statement = $conne->prepare("SELECT * FROM Productos");
+        $statement = $conne->prepare("SELECT * FROM Productos where activo = 1");
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
     }
     $likedProductIds = [];
     if (!empty($_SESSION["user"])) {
-        $statement = $conne->prepare("SELECT ProductoID FROM Likes WHERE Usuario = :usuario");
+        $statement = $conne->prepare("SELECT ProductoID FROM Likes WHERE Usuario = :usuario AND activo = 1");
         $statement->bindParam(":usuario", $_SESSION["user"]);
         $statement->execute();
         $likedProductIds = $statement->fetchAll(PDO::FETCH_COLUMN);

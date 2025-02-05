@@ -9,7 +9,7 @@ require "./partials/header.php";
 <main>
   <?php
   $usuario = $_SESSION["user"];
-  $statement = $conne->prepare("select * from productos where ID IN (SELECT ProductoID from likes WHERE Usuario=:usuario)");
+  $statement = $conne->prepare("select * from productos where ID IN (SELECT ProductoID from likes WHERE Usuario=:usuario) AND activo = 1");
   $statement->bindParam(":usuario", $usuario);
   $statement->execute();
   $productos = $statement->fetchAll(PDO::FETCH_ASSOC);

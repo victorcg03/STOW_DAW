@@ -22,7 +22,7 @@ function tieneLike($idProducto)
     <div class="productos-anunciados">
         <?php
         try {
-            $statement = $conne->prepare("SELECT * FROM Productos ORDER BY RAND() LIMIT 4");
+            $statement = $conne->prepare("SELECT * FROM Productos WHERE activo = 1 ORDER BY RAND() LIMIT 4");
             $statement->execute();
             $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

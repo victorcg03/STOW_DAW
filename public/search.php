@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" && !empty($_GET['search'])) {
     // Unir todas las condiciones con AND
     $sqlCondition = implode(" AND ", $sqlParts);
     // Preparar la consulta SQL
-    $query = "SELECT * FROM productos WHERE $sqlCondition";
+    $query = "SELECT * FROM productos WHERE $sqlCondition AND activo = 1 AND activo = 1";
     $stmt = $conne->prepare($query);
     // Vincular cada palabra de búsqueda a su marcador único
     foreach ($palabras as $index => $palabra) {

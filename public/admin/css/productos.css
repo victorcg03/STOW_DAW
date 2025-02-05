@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  height: 100dvh;
+  background-color: #202b38;
+}
+
+main {
+  margin: 0 auto;
+  width: 100%;
+  height: calc(100% - 60px);
+  margin-top: 40px;
+  display: flex;
+  padding: 20px;
+  max-width: 1400px;
+  justify-content: center;
+  z-index: -1;
+}
+
+header {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-weight: 800;
+  font-size: 1.4em;
+  background-color: rgba(0, 0, 0, 0.2);
+  gap: 20px;
+
+  a {
+    color: #fff;
+  }
+}
+
+.productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 35px;
+
+  .producto {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .eliminar{
+      background-color: red !important;
+      transition: background-color 0.3s;
+    }
+    .eliminar:hover{
+      background-color: #ff0000a0 !important;
+    }
+    .imagenes {
+      width: 100%;
+      height: 70%;
+      position: relative;
+      overflow: hidden;
+      span {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 35px;
+        background-color: #ddd;
+        border-radius: 100vmax;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99;
+        color: #fff;
+        font-size: 18px;
+        aspect-ratio: 1/1;
+        cursor: pointer;
+      }
+
+      .fa-angle-left {
+        left: 10px;
+      }
+
+      .fa-angle-right {
+        right: 10px;
+      }
+
+      .carrousel {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        transform: translateX(0%);
+        transition: transform 0.5s;
+
+        .img-producto {
+          flex: 0 0 100%;
+          width: 100%;
+          height: 100%;
+          position: relative;
+          z-index: 1;
+          display: block;
+
+          button {
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            padding: 3px 5px;
+            font-weight: 800;
+            font-size: 14px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            background-color: green;
+            transition: background-color 0.3s;
+          }
+          button:hover{
+            background-color: #006900a0;
+          }
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    .info-producto {
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        .form-row{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          height: 30px;
+          background-color: #fff;
+          label{
+            padding: 5px;
+            width: 120px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #333;
+          }
+          input{
+            display: flex;
+            align-items: center;
+            height: 100%;
+            border: none;
+            width: 100%;
+            height: 100%;
+            padding-left: 10px;
+          }
+        }
+        .stocks{
+          display: flex;
+          div{
+            label{
+              display: inline-block;
+              width: 100%;
+              color: #ddd;
+              font-weight: 700;
+              font-size: 14px;
+              background-color: #333;
+              text-align: center;
+            }
+            input{
+              width: 100%;
+              text-align: center;
+            }
+          }
+        }
+        button {
+          width: 100%;
+          background-color: green;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 45px;
+          border-radius: none;
+          border: none;
+          color: #ddd;
+          font-weight: 800;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+        button:hover {
+          background-color: #006900a0;
+        }
+      }
+    }
+  }
+}
