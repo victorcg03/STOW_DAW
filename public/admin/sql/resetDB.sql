@@ -24,7 +24,8 @@ CREATE TABLE Productos (
     ClaseProducto VARCHAR(20),
     Stock VARCHAR(255),
     Precio DECIMAL(10, 2),
-    Imagenes TEXT
+    Imagenes TEXT, 
+    activo INT DEFAULT 1
 );
 
 CREATE TABLE Likes (

@@ -5,6 +5,59 @@ async function cargarPagina() {
   if (productos) {
     mostrarProductos(productos);
   }
+  habilitarFormularioNuevoProducto();
+}
+function habilitarFormularioNuevoProducto() {
+  const inputImagenes = document.querySelector('.nuevoProducto input[type="file"]');
+  const carrousel = document.querySelector('.nuevoProducto .imagenes .carrousel');
+  inputImagenes.addEventListener('change', function () {
+    const imagenes = Array.from(inputImagenes.files);
+    carrousel.innerHTML = '';
+    let imagenesCargadas = 0;
+    imagenes.forEach(imagen => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        carrousel.innerHTML += `<div class="img-producto">
+                                  <button class="eliminar" data-img="${imagen.name}">Eliminar imagen</button>
+                                  <img src="${e.target.result}">
+                                </div>`;
+        imagenesCargadas++;
+        if (imagenesCargadas === imagenes.length) {
+          habilitarCarrouseles();
+        }
+      }
+      reader.readAsDataURL(imagen);
+    });
+  });
+  const form = document.querySelector('.nuevoProducto form');
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+      const formData = new FormData(form);
+      try {
+        const response = await fetch('./php/addProduct', {
+          method: 'POST',
+          body: formData
+        });
+
+        const text = await response.text();
+        
+        const data = JSON.parse(text);
+        if (data.error) {
+          mensajePop(data.error, true);
+        } else {
+          mensajePop(data.success, false);
+          form.closest('.nuevoProducto').insertAdjacentHTML('afterend', productoHTML(data.producto));
+          habilitarBotonesEliminar();
+          habilitarFormularios();
+          habilitarBotonesImagenes();
+          habilitarCarrouseles();
+        }
+        form.reset();
+        carrousel.innerHTML = '';
+      } catch (error) {
+        console.error("Error procesando la respuesta:", error);
+      }
+  });
 }
 async function obtenerProductos() {
   const response = await fetch('./php/obtenerProductos.php');
@@ -31,7 +84,7 @@ function habilitarBotonesImagenes() {
   const botones = document.querySelectorAll('.img-producto button');
 
   botones.forEach(boton => {
-    boton.addEventListener('click', function () {
+    boton.addEventListener('click', function () {      
       boton.innerText = boton.classList.contains('eliminar') ? "No eliminar imagen" : "Eliminar imagen";
       boton.classList.toggle('eliminar');
 
@@ -54,7 +107,7 @@ function habilitarBotonesImagenes() {
 }
 
 function habilitarFormularios() {
-  const forms = document.querySelectorAll('.info-producto form');
+  const forms = document.querySelectorAll('.producto:not(.nuevoProducto) .info-producto form');
   forms.forEach(form => {
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -185,13 +238,13 @@ const productoHTML = producto => {
           </div>
 `
 }
-const imagenTemplate = (imagen) => 
+const imagenTemplate = (imagen) =>
   `
     <div class="img-producto">
       <button class="eliminar" data-img="${imagen.trim()}">Eliminar imagen</button>
       <img src="../img/${imagen.trim()}">
     </div>`
-;
+  ;
 export function habilitarCarrouseles() {
   const carrouseles = document.querySelectorAll('.carrousel');
   carrouseles.forEach(carrousel => {

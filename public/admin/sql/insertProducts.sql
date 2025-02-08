@@ -1,4 +1,4 @@
-INSERT INTO productos
+INSERT INTO productos (ID, Nombre, Sexo, Color, ClaseProducto, Stock, Precio, Imagenes)
 VALUES
     ("PROD1", "Sudadera Oversize Blanca", "Hombre", "Blanco", "Sudadera", "XS:8, S:12, M:0, L:6, XL:4", 42.50, "img1.jpg, img2.webp, img3.jpg"),
     ("PROD2", "Gorro Casual Negro", "Mujer", "Negro", "Gorro", "XS:0, S:5, M:10, L:15, XL:0", 15.00, "img1.jpg, img2.webp, img3.jpg"),

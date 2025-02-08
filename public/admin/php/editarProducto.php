@@ -73,6 +73,9 @@ function procesarImagenes($imagenes, $id){
 
     if (move_uploaded_file($imagenes['tmp_name'][$key], $rutaImagen)) {
       $imagenesNuevas[] = $nombreUnico;
+    } else {
+      echo json_encode(["error" => "Error al subir $imagen"]);
+      die();
     }
   }
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <script type="module" src="./js/productos.js"></script>
   <script src="https://kit.fontawesome.com/cade5ed75a.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
   <header>
     <a href="./php/logout">Cerrar Sesión</a>
@@ -18,8 +20,69 @@
   <div class="mensaje invisible"></div>
   <main>
     <div class="productos">
-
+      <div class="producto nuevoProducto">
+        <div class="imagenes" style="background-color: #fff;">
+          <span class="fa-solid fa-angle-left"></span>
+          <span class="fa-solid fa-angle-right"></span>
+          <div class="carrousel">
+            
+          </div>
+        </div>
+        <div class="info-producto">
+          <form>
+            <div class="form-row">
+              <label for="imgnes">Imagenes:</label>
+              <input type="file" id="imgnes" name="imagenes[]" accept="image/*" multiple required>
+            </div>
+            <div class="form-row">
+              <label for="nombre">Nombre:</label>
+              <input type="text" name="nombre" id="nombre" required>
+            </div>
+            <div class="form-row">
+              <label for="precio">Precio:</label>
+              <input step="0.01" min="0.1" type="number" name="precio" id="precio" required>
+            </div>
+            <div class="form-row">
+              <label for="sexo">Sexo:</label>
+              <input type="text" name="sexo" id="sexo" required>
+            </div>
+            <div class="form-row">
+              <label for="color">Color:</label>
+              <input type="text" name="color" id="color" required>
+            </div>
+            <div class="form-row">
+              <label for="clase">Clase:</label>
+              <input type="text" name="clase" id="clase" required>
+            </div>
+            <div class="stocks">
+              <div>
+                <label for="xs">XS</label>
+                <input type="number" min="0" name="xs" id="xs" required>
+              </div>
+              <div>
+                <label for="s">S</label>
+                <input type="number" min="0" name="s" id="s" required>
+              </div>
+              <div>
+                <label for="m">M</label>
+                <input type="number" min="0" name="m" id="m" required>
+              </div>
+              <div>
+                <label for="l">L</label>
+                <input type="number" min="0" name="l" id="l" required>
+              </div>
+              <div>
+                <label for="xl">XL</label>
+                <input type="number" min="0" name="xl" id="xl" required>
+              </div>
+            </div>
+            <button type="submit">Guardar producto</button>
+            <button class="eliminar" type="reset">Resetar formulario</button>
+          </form>
+        </div>
+      </div>
     </div>
   </main>
 </body>
+
 </html>
