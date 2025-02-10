@@ -21,7 +21,7 @@ try {
     }
     $likedProductIds = [];
     if (!empty($_SESSION["user"])) {
-        $statement = $conne->prepare("SELECT ProductoID FROM Likes WHERE Usuario = :usuario AND activo = 1");
+        $statement = $conne->prepare("SELECT ProductoID FROM Likes WHERE Usuario = :usuario");
         $statement->bindParam(":usuario", $_SESSION["user"]);
         $statement->execute();
         $likedProductIds = $statement->fetchAll(PDO::FETCH_COLUMN);
