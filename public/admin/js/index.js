@@ -11,7 +11,7 @@ window.addEventListener('load', function() {
     });
     const data = await res.json();
     if (data.error) {
-      error(data.error);
+      mensajePop(data.error, true);
     }
     if (data.sesionIniciada) {
       window.location.href = 'inicio';
