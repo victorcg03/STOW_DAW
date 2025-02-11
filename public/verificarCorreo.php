@@ -81,7 +81,10 @@
             </body>
             
             </html>';
-            enviarCorreo($correoUsuario, "Código de verificación", $mensaje);
+            $res = json_decode(enviarCorreo($correoUsuario, "Código de verificación", $mensaje));
+            if (!$res->enviado) {
+                $error = "No se ha podido enviar el correo" . $res->error;
+            }
         }
     }
 

@@ -43,13 +43,12 @@ function enviarCorreo($destinatario, $asunto, $mensaje, $imagenes = [])
         foreach ($imagenes as $imagen) {
             $mail->addEmbeddedImage($imagen["src"], $imagen["cid"]);
         }
-        if ($mail->send()) {
-            return true;
+        if($mail->send()){
+            return json_encode(["enviado" => true]);
         } else {
-            return false;
+            return json_encode(["enviado" => false, "error" => $mail->ErrorInfo]);
         }
     } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: " . $e->getMessage();
-        return false;
+        return "Message could not be sent. Mailer Error: " . $e->getMessage();
     }
 }
