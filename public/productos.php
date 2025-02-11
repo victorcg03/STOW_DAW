@@ -48,7 +48,7 @@ function tieneLike($idProducto)
     <div class="productos">
         <?php
         foreach ($productos as $producto) { ?>
-            <div class="producto" data-id="<?= $producto['ID'] ?>">
+            <a class="producto" data-id="<?= $producto['ID'] ?>" href="./producto?id=<?= $producto['ID'] ?>">
                 <span class="fa-layers fa-fw">
                     <i class="fa-regular fa-heart"></i>
                     <i class="fa-solid fa-heart" style="display:<?= tieneLike($producto['ID']) ?>"></i>
@@ -84,7 +84,7 @@ function tieneLike($idProducto)
                         </select>
                     </div>
                 </div>
-            </div>
+            </a>
         <?php }
         ?>
     </div>

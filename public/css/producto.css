@@ -1,0 +1,16 @@
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100dvh - 40px) !important;
+  padding: 0 !important;
+  padding-top: 60px !important;
+  margin: 0 !important;
+
+  .producto {
+    width: 400px!important;
+    height: auto !important;
+    flex-grow: 1;
+  }
+}
