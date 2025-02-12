@@ -38,7 +38,7 @@ require "./partials/header.php";
               <?php
               $imagenes = explode(",", $producto['Imagenes']);
               foreach ($imagenes as $imagen) { ?>
-                <img src="./img/<?= trim($imagen) ?>">
+                  <img src="./img/<?= trim($imagen) ?>" alt="Imagen del producto <?= $producto["Nombre"]?> de <?= $producto["Sexo"]?>">
               <?php }
               ?>
             </div>

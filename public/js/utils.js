@@ -13,7 +13,9 @@ export function habilitarCarrouseles() {
             carrousel.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
 
-        function moverDerecha() {
+        function moverDerecha(e) {
+            e.stopPropagation();
+            e.preventDefault();
             if (currentIndex < images.length - 1) {
                 currentIndex++;
             } else {
@@ -22,7 +24,9 @@ export function habilitarCarrouseles() {
             actualizarCarrusel();
         }
 
-        function moverIzquierda() {
+        function moverIzquierda(e) {
+            e.stopPropagation();
+            e.preventDefault();
             if (currentIndex > 0) {
                 currentIndex--;
             } else {
@@ -58,7 +62,9 @@ export function habilitarCarrouseles() {
 }
 
 export function habilitarLikes() {
-    document.querySelectorAll(".producto .fa-regular.fa-heart").forEach(corazon => corazon.addEventListener("click", async () => {
+    document.querySelectorAll(".producto .fa-regular.fa-heart").forEach(corazon => corazon.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        e.preventDefault();
         const corazonFondo = corazon.closest(".producto").querySelector(".fa-solid");
         const idProducto = corazon.closest(".producto").dataset.id;
         let usuario = await comprobarSesion();
@@ -86,8 +92,16 @@ export function habilitarLikes() {
     }));
 }
 export function habilitarBotonesCompra() {
+    document.querySelectorAll(".tallaProducto").forEach(select => {
+        select.addEventListener("click", (e) => {
+            e.stopPropagation(); // Evita que el evento suba al <a>
+            e.preventDefault(); // Evita que el enlace se active
+        });
+    });
     document.querySelectorAll(".producto .anadirCesta").forEach(botonAnadir =>
-        botonAnadir.addEventListener("click", async () => {
+        botonAnadir.addEventListener("click", async (e) => {
+            e.stopPropagation();
+            e.preventDefault();
             if (await comprobarSesion()) {
                 document.querySelector(".carrito .mensaje").classList.add("display-none");
                 document.querySelector(".carrito .info-carrito").classList.remove("display-none");

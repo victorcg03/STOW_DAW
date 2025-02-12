@@ -15,7 +15,7 @@ require_once "./database.php";
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title class="notranslate">STOW - <?=$titulo?></title>
+    <title class="notranslate">PAGINA DE <?= $titulo ?> DE STOW</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -23,6 +23,10 @@ require_once "./database.php";
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
+    <meta name="description" content="Descubre en STOW las mejores sudaderas para hombre y mujer, con diseños originales y calidad premium a un precio justo. Encuentra tu sudadera perfecta, desde sudaderas negras para mujer hasta estilos únicos para cualquier ocasión. Además, explora nuestra colección de camisetas y gorros para hombre y mujer, diseñados para quienes buscan marcar la diferencia.
+STOW no es solo ropa, es una declaración. Creemos en la calidad sin compromisos, en diseños que hablan por sí solos y en precios justos. No seguimos tendencias, las creamos.
+Somos más que una marca, somos un movimiento. Una familia de inconformistas, creativos y apasionados que visten con actitud y sin miedo a ser auténticos.
+Únete a la revolución. Viste diferente. Viste STOW.">
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
