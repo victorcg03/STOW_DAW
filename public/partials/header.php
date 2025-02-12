@@ -6,6 +6,18 @@ $titulo = strtoupper(basename($_SERVER['PHP_SELF'], ".php"));
 if ($titulo == "INDEX") {
     $titulo = "INICIO";
 }
+if (isset($_GET['id'])) {
+    $titulo = "PRODUCTO" . $_GET['id'];
+}
+if (isset($_GET['sexo'])) {
+    $titulo = "PRODUCTOS DE " . $_GET['sexo'];
+}
+if (isset($_GET['tipo'])) {
+    $titulo = $_GET['tipo'] . " DE " . $_GET['sexo'];
+}
+if (isset($_GET['search'])) {
+    $titulo = "RESULTADOS BUSQUEDA DE " . $_GET['search'];
+}
 require_once "./database.php";
 ?>
 <!DOCTYPE html>
@@ -23,10 +35,7 @@ require_once "./database.php";
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
-    <meta name="description" content="Descubre en STOW las mejores sudaderas para hombre y mujer, con diseños originales y calidad premium a un precio justo. Encuentra tu sudadera perfecta, desde sudaderas negras para mujer hasta estilos únicos para cualquier ocasión. Además, explora nuestra colección de camisetas y gorros para hombre y mujer, diseñados para quienes buscan marcar la diferencia.
-STOW no es solo ropa, es una declaración. Creemos en la calidad sin compromisos, en diseños que hablan por sí solos y en precios justos. No seguimos tendencias, las creamos.
-Somos más que una marca, somos un movimiento. Una familia de inconformistas, creativos y apasionados que visten con actitud y sin miedo a ser auténticos.
-Únete a la revolución. Viste diferente. Viste STOW.">
+    <meta name="description" content="Descubre en STOW las mejores sudaderas para hombre y mujer, con diseños originales y calidad premium a un precio justo. Además, explora nuestra colección de camisetas y gorros para hombre y mujer. STOW no es solo ropa, creemos en la calidad sin compromisos, en diseños que hablan por sí solos y en precios justos.">
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
