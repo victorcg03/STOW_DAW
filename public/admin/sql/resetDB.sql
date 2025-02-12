@@ -19,7 +19,7 @@ CREATE TABLE Usuarios (
 CREATE TABLE Productos (
     ID VARCHAR(10) PRIMARY KEY,
     Nombre VARCHAR(255),
-    Sexo VARCHAR(10),
+    Sexo VARCHAR(30),
     Color VARCHAR(25),
     ClaseProducto VARCHAR(20),
     Stock VARCHAR(255),
