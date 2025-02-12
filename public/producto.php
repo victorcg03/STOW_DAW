@@ -56,7 +56,7 @@ function tieneLike($idProducto)
     </div>
     <div class="detalle-producto">
       <div class="info-producto">
-        <p class="nombre"><?= $producto["Nombre"] . "|" . $producto["Sexo"] ?></p>
+        <p class="nombre"><?= mb_convert_case($producto["Nombre"] . "|" . $producto["Sexo"], MB_CASE_TITLE) ?></p>
         <p class="precio"><?= $producto["Precio"] ?>€</p>
       </div>
       <div class="comprar">
