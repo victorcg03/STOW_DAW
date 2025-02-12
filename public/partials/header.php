@@ -8,6 +8,7 @@ require_once "./database.php";
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title class="notranslate">STOW</title>
@@ -27,8 +28,7 @@ require_once "./database.php";
         }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script src="./js/header.js">
-    </script>
+    <script src="./js/header.js"></script>
 </head>
 
 <body>
@@ -113,6 +113,6 @@ require_once "./database.php";
                     <a href="./pedidos">Ver pedidos</a>
                     <a href="./logout">Cerrar sesión</a>
                 </div>
-            <?php }?>
+            <?php } ?>
         </div>
     </header>
