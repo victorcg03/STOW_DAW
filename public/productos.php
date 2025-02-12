@@ -2,14 +2,14 @@
 require_once("./partials/header.php");
 try {
     if (!empty($_GET['tipo'])) {
-        $statement = $conne->prepare("SELECT * FROM Productos WHERE LOWER(Sexo) = LOWER(:sexo) AND LOWER(ClaseProducto) = LOWER(:tipo) AND activo = 1");
+        $statement = $conne->prepare("SELECT * FROM Productos WHERE LOWER(Sexo) LIKE LOWER(CONCAT('%', :sexo, '%')) AND LOWER(ClaseProducto) = LOWER(:tipo) AND activo = 1");
         $statement->bindParam(":sexo", $_GET["sexo"]);
         $statement->bindParam(":tipo", $_GET["tipo"]);
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
         $subtitulo = ($_GET["tipo"] == "gorro" ? "Estos son todos los " : "Estas son todas las ") . $_GET["tipo"] . "s de " . $_GET["sexo"] . " de nuestro catálogo: ";
     } else if (!empty($_GET['sexo'])) {
-        $statement = $conne->prepare("SELECT * FROM Productos WHERE Sexo = :sexo AND activo = 1");
+        $statement = $conne->prepare("SELECT * FROM Productos WHERE LOWER(Sexo)  LIKE LOWER(CONCAT('%', :sexo, '%'))  AND activo = 1");
         $statement->bindParam(":sexo", $_GET["sexo"]);
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -72,7 +72,7 @@ function tieneLike($idProducto)
                 </div>
                 <div class="detalle-producto">
                     <div class="info-producto">
-                        <p class="nombre"><?= $producto["Nombre"] . "|" . $producto["Sexo"] ?></p>
+                        <p class="nombre"><?= mb_convert_case($producto["Nombre"] . "|" . $producto["Sexo"], MB_CASE_TITLE) ?></p>
                         <p class="precio"><?= $producto["Precio"] ?>€</p>
                     </div>
                     <div class="comprar">

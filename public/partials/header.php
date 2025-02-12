@@ -2,12 +2,17 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+require_once "./database.php";
 $titulo = "STOW - " . strtoupper(basename($_SERVER['PHP_SELF'], ".php"));
 if ($titulo == "STOW - INDEX") {
     $titulo = "STOW - INICIO";
 }
 if (isset($_GET['id'])) {
-    $titulo = "STOW - PRODUCTO" . $_GET['id'];
+    $statement = $conne -> prepare("SELECT nombre FROM productos WHERE id = :id");
+    $statement -> bindParam(":id", $_GET['id']);
+    $statement -> execute();
+    $producto = $statement -> fetch();
+    $titulo = "STOW - " . strtoupper($producto['nombre']);
 }
 if (isset($_GET['sexo'])) {
     $titulo = "STOW - CATÁLOGO DE " . strtoupper($_GET['sexo']);
@@ -18,7 +23,6 @@ if (isset($_GET['tipo'])) {
 if (isset($_GET['search'])) {
     $titulo = "STOW - RESULTADOS BUSQUEDA DE " . $_GET['search'];
 }
-require_once "./database.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
