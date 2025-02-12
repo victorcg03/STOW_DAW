@@ -1,6 +1,5 @@
 
 let path = window.location.pathname
-console.log(path);
 if (path == "/" || path == "/index.php") {
     document.title = "STOW - INICIO";
 } else {
