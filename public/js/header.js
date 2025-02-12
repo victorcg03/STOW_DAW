@@ -1,4 +1,5 @@
 
+let path = window.location.pathname
 console.log(path);
 if (path == "/" || path == "/index.php") {
     document.title = "STOW - INICIO";
@@ -13,7 +14,6 @@ window.addEventListener("load", () => {
     cargarCarrito();
     habilitarSearch();
     habilitarInteraccionesProductos();
-    let path = window.location.pathname
 });
 
 function traductorGoogle() {
