@@ -1,10 +1,3 @@
-let path = window.location.pathname
-if (path == "/" || path == "/index.php") {
-    document.title = "STOW - INICIO";
-} else {
-    let title = path.split("/").pop().split(".")[0].toUpperCase();
-    document.title = `STOW - ${title}`;
-}
 window.addEventListener('load', ()=>{
     setTimeout(() => {
         const translateElement = document.querySelector("#google_translate_element .skiptranslate");

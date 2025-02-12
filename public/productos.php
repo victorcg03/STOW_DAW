@@ -7,13 +7,16 @@ try {
         $statement->bindParam(":tipo", $_GET["tipo"]);
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $subtitulo = ($_GET["tipo"] == "gorro" ? "Estos son todos los " : "Estas son todas las ") . $_GET["tipo"] . "s de " . $_GET["sexo"] . " de nuestro catálogo: ";
     } else if (!empty($_GET['sexo'])) {
         $statement = $conne->prepare("SELECT * FROM Productos WHERE Sexo = :sexo AND activo = 1");
         $statement->bindParam(":sexo", $_GET["sexo"]);
         $statement->execute();
         $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $subtitulo = "Estos son todos los productos de " . $_GET["sexo"] . " de nuestro catálogo: ";
     } else if (!empty($_GET['search'])) {
         require_once "./search.php";
+        $subtitulo = "Estos son los resultados de la búsqueda '" . $_GET["search"] . "': ";
     } else {
         $statement = $conne->prepare("SELECT * FROM Productos where activo = 1");
         $statement->execute();
@@ -45,6 +48,7 @@ function tieneLike($idProducto)
             <input type="text" name="search" placeholder="Sudadera blanca..." value="<?= !empty($_GET['search']) ? $_GET['search'] : "" ?>">
         </form>
     </div>
+    <h2><?= !empty($subtitulo) ? $subtitulo : "Estos son todos los productos de nuestro catálogo:"?></h2>
     <p class="productos-encontrados">Productos encontrados: <?= count($productos) ?></p>
     <div class="productos">
         <?php
