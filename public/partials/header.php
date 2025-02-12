@@ -2,21 +2,21 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$titulo = strtoupper(basename($_SERVER['PHP_SELF'], ".php"));
-if ($titulo == "INDEX") {
-    $titulo = "INICIO";
+$titulo = "STOW - " . strtoupper(basename($_SERVER['PHP_SELF'], ".php"));
+if ($titulo == "STOW - INDEX") {
+    $titulo = "STOW - INICIO";
 }
 if (isset($_GET['id'])) {
-    $titulo = "PRODUCTO" . $_GET['id'];
+    $titulo = "STOW - PRODUCTO" . $_GET['id'];
 }
 if (isset($_GET['sexo'])) {
-    $titulo = "PRODUCTOS DE " . $_GET['sexo'];
+    $titulo = "STOW - CATÁLOGO DE " . strtoupper($_GET['sexo']);
 }
 if (isset($_GET['tipo'])) {
-    $titulo = $_GET['tipo'] . " DE " . $_GET['sexo'];
+    $titulo = "STOW - " . strtoupper($_GET['tipo']) . "S DE " . strtoupper($_GET['sexo']);
 }
 if (isset($_GET['search'])) {
-    $titulo = "RESULTADOS BUSQUEDA DE " . $_GET['search'];
+    $titulo = "STOW - RESULTADOS BUSQUEDA DE " . $_GET['search'];
 }
 require_once "./database.php";
 ?>
@@ -27,7 +27,7 @@ require_once "./database.php";
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title class="notranslate">PAGINA DE <?= $titulo ?> DE STOW</title>
+    <title class="notranslate"><?= $titulo ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
