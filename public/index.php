@@ -17,6 +17,11 @@ function tieneLike($idProducto)
 <script type="module" src="./js/index.js"></script>
 <main>
     <div class="banner">
+        <div id="capa"></div>
+        <h1>STOW no es solo ropa, es una declaración.</h1>
+        <p>Creemos en la calidad sin compromisos, en diseños que hablan por sí solos y en precios justos para quienes buscan diferenciarse. No seguimos tendencias, las creamos</p>
+        <p>Somos más que una marca, somos un movimiento. Una familia de inconformistas, creativos y apasionados que visten con actitud y sin miedo a ser auténticos</p>
+        <p>Únete a la revolución. Viste diferente. Viste STOW</p>
     </div>
     <h2>ENVIOS DE 5 A 7 DIAS</h2>
     <div class="productos-anunciados">

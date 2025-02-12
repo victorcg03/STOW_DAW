@@ -38,6 +38,7 @@ function tieneLike($idProducto)
 <link rel="stylesheet" href="./css/productos.css">
 <script type="module" src="./js/productos.js"></script>
 <main>
+    <h1>CATALOGO</h1>
     <div class="barra-busqueda">
         <p>Buscar: </p>
         <form action="./productos">

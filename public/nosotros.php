@@ -3,7 +3,8 @@ require_once("./partials/header.php");
 ?>
 <link rel="stylesheet" href="./css/nosotros.css">
 <main>
-  <h1>Más que ropa, un movimiento. Más que estilo, una familia</h1>
+  <h1>SOBRE NOSOTROS</h1>
+  <p>Más que ropa, un movimiento. Más que estilo, una familia</p>
   <section>
     <img src="./img/oferta.jpg">
     <div>
