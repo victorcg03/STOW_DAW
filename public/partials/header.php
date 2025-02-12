@@ -35,7 +35,7 @@ require_once "./database.php";
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
-    <meta name="description" content="Descubre en STOW las mejores sudaderas para hombre y mujer, con diseños originales y calidad premium a un precio justo. Además, explora nuestra colección de camisetas y gorros para hombre y mujer. STOW no es solo ropa, creemos en la calidad sin compromisos, en diseños que hablan por sí solos y en precios justos.">
+    <meta name="description" content="Descubre en STOW las mejores sudaderas, camisetas y gorros para hombre y mujer, con diseños originales y calidad premium a un precio justo.">
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
