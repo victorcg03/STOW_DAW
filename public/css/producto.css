@@ -15,3 +15,21 @@ main {
     place-self: center;
   }
 }
+dialog{
+  all: unset;
+  position: absolute;
+  height: 90vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &::backdrop {
+    background-color: #000;
+    opacity: 0.75;
+  }
+  img{
+    height: 100%;
+  }
+  span{
+    position: absolute;
+  }
+}

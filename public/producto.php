@@ -36,7 +36,9 @@ function tieneLike($idProducto)
     habilitarBotonesCompra();
   }); 
 </script>
+<script src="./js/producto.js"></script>
 <main class="productos">
+  <dialog><img src=""/></dialog>
   <div class="producto" data-id="<?= $producto['ID'] ?>">
     <span class="fa-layers fa-fw">
       <i class="fa-regular fa-heart"></i>
