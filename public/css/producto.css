@@ -12,5 +12,6 @@ main {
     width: 400px!important;
     height: auto !important;
     flex-grow: 1;
+    place-self: center;
   }
 }
