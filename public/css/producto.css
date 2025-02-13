@@ -1,35 +1,67 @@
-main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100dvh - 40px) !important;
-  padding: 0 !important;
+main{
+  height: 100% !important;
+  width: 100% !important;
   padding-top: 60px !important;
-  margin: 0 !important;
-
-  .producto {
-    width: 400px!important;
-    height: auto !important;
-    flex-grow: 1;
-    place-self: center;
+  place-content: center !important; 
+  place-items: center !important;
+}
+@media screen and (max-width:700px) {
+  main{
+    padding-top: 90px !important;
   }
+  
 }
 dialog{
-  all: unset;
-  position: absolute;
-  height: 90vh;
+  width: fit-content;
+  height: fit-content;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
   &::backdrop {
-    background-color: #000;
+    background-color: black;
     opacity: 0.75;
   }
   img{
-    height: 100%;
+    width: 550px;
+    height: auto;
+    aspect-ratio: 1/1.5;
+    object-fit: cover;
   }
   span{
     position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    &:hover{
+      background-color: rgba(0,0,0,0.7);
+    }
+
   }
+}
+dialog[open]{
+  display: flex;
+}
+@media screen and (max-width:700px) {
+  dialog{
+    img{
+      width: 100vw;
+      height: auto;
+      aspect-ratio: none;
+    }
+  }
+  
 }

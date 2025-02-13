@@ -1,10 +1,12 @@
 .productos,
 .productos-anunciados {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minMax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minMax(400px, 20%));
+    place-items: center;
     gap: 30px;
     padding: 90px;
     color: #fff;
+    width: 100%;
     .producto{
         cursor: pointer;
         width: 100%;

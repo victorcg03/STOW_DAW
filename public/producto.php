@@ -26,7 +26,6 @@ function tieneLike($idProducto)
   return in_array($idProducto, $likedProductIds) ? "block" : "none";
 }
 ?>
-<link rel="stylesheet" href="./css/common.css">
 <link rel="stylesheet" href="./css/producto.css">
 <script type="module">
   import { habilitarCarrouseles, habilitarLikes, habilitarBotonesCompra } from "./js/utils.js";
@@ -37,8 +36,8 @@ function tieneLike($idProducto)
   }); 
 </script>
 <script src="./js/producto.js"></script>
+<dialog><span>X</span><img src=""/></dialog>
 <main class="productos">
-  <dialog><img src=""/></dialog>
   <div class="producto" data-id="<?= $producto['ID'] ?>">
     <span class="fa-layers fa-fw">
       <i class="fa-regular fa-heart"></i>
