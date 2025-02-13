@@ -47,10 +47,11 @@ h2{
 .oferta{
     margin: 50px 0;
     width: 100%;
-    height: 30rem;
+    height: 40rem;
     background-image: url("../img/oferta.jpg");
-    background-size: cover;
+    background-size:cover;
     display: flex;
+    background-position: top;
     justify-content: center;
     align-items: center;
     font-size:clamp(25px, 6vw, 3.5rem);

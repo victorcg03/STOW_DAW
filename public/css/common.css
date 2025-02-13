@@ -189,3 +189,10 @@
         border: 1px solid goldenrod;
     }
 }
+@media screen and (max-width:700px) {
+    .productos,
+    .productos-anunciados {
+        grid-template-columns: 1fr;
+        padding: 30px;
+    }
+}
