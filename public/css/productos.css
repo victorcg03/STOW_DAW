@@ -1,6 +1,6 @@
 main {
     z-index: -1;
-    padding: 125px 10px;
+    padding: 60px 10px;
     display: flex;
     flex-direction: column;
     h2{
@@ -8,6 +8,7 @@ main {
         display: flex;
         justify-content: center;
         margin-top: 20px;
+        text-align: center;
     }
     .barra-busqueda{
         width: 100%;
