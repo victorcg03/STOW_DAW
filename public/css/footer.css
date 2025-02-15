@@ -10,6 +10,7 @@ footer{
   text-align: center;
   word-wrap: break-word;
   text-overflow:clip;
+  z-index: 99;
 }
 footer a{
   cursor: pointer;

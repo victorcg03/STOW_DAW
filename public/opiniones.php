@@ -1,45 +1,68 @@
 <?php
 require_once './partials/header.php';
-$loggedIn = false;
-if (isset($_SESSION['user_id'])) {
-  $loggedIn = true;
-}
 
-?>
-<main>
-  <?php
-  // Obtener las opiniones de la base de datos
-$opiniones = obtenerOpiniones();
-
-// Mostrar las opiniones
-foreach ($opiniones as $opinion) {
-  echo "<div class='opinion'>";
-  echo "<p>{$opinion['texto']}</p>";
-  if ($loggedIn) {
-    echo "<button class='like-btn' data-opinion-id='{$opinion['id']}' data-action='like'>Like</button>";
-    echo "<button class='dislike-btn' data-opinion-id='{$opinion['id']}' data-action='dislike'>Dislike</button>";
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['opinion']) && !empty($_SESSION['user'])) {
+  try {
+    $stmt = $conne->prepare("INSERT INTO opiniones (email, opinion) VALUES (:email, :opinion)");
+    $stmt->bindParam(':email', $_SESSION['user']);
+    $stmt->bindParam(':opinion', $_POST['opinion']);
+    if ($stmt->execute()) {
+      $_SESSION['msg'] = "Opinión enviada correctamente"; // Guardar mensaje en sesión
+    } else {
+      $_SESSION['msg'] = "Error al enviar la opinión";
+    }
+  } catch (PDOException $e) {
+    $_SESSION['msg'] = "Error al enviar la opinión";
   }
-  echo "</div>";
-}
 
-// Mostrar formulario para dejar una opinión si el usuario ha iniciado sesión
-if ($loggedIn) {
-  echo "<form action='guardar_opinion.php' method='post'>";
-  echo "<textarea name='opinion' placeholder='Deja tu opinión'></textarea>";
-  echo "<button type='submit'>Enviar opinión</button>";
-  echo "</form>";
+  // Redirigir para evitar reenvío del formulario
+  header("Location: opiniones");
+  exit();
 }
-
-// Función para obtener las opiniones de la base de datos
-function obtenerOpiniones() {
-  return [
-    ['id' => 1, 'texto' => '¡Me encanta esta tienda!'],
-    ['id' => 2, 'texto' => 'Los productos son de muy buena calidad'],
-    ['id' => 3, 'texto' => 'El envío fue muy rápido'],
-  ];
-}
-  ?>
-</main>
-<?php
-require_once './partials/footer.php';
 ?>
+
+<link rel="stylesheet" href="./css/opiniones.css">
+<main>
+  <div class="filtro"></div>
+  <div class="opiniones">
+    <h1>Opiniones de nuestros clientes:</h1>
+    <?php
+    $stmt = $conne->prepare("SELECT * FROM opiniones");
+    $stmt->execute();
+    $opiniones = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($opiniones as $opinion) { ?>
+      <div class="opinion">
+        <div class="opinion-header">
+          <h2><?= htmlspecialchars($opinion['email']) ?></h2>
+          <p><?= htmlspecialchars($opinion['fecha']) ?></p>
+        </div>
+        <p><?= htmlspecialchars($opinion['opinion']) ?></p>
+      </div>
+    <?php } ?>
+  </div>
+
+  <?php if (!empty($_SESSION['user'])) { ?>
+    <form action="./opiniones.php" method="POST">
+      <h2>¡Comparte tu opinión!</h2>
+      <div class="form-row">
+        <label for="name">Correo electrónico:</label>
+        <input type="text" name="name" id="name" value="<?= htmlspecialchars($_SESSION['user']) ?>" readonly>
+      </div>
+      <div class="form-row">
+        <label for="opinion">Opinión:</label>
+        <textarea name="opinion" id="opinion" rows="5" required></textarea>
+      </div>
+      <div class="form-row">
+        <button type="submit">Enviar</button>
+      </div>
+      <?php
+      if (!empty($_SESSION['msg'])) {
+        echo "<p class='msg'>{$_SESSION['msg']}</p>";
+        unset($_SESSION['msg']); // Borrar mensaje después de mostrarlo
+      }
+      ?>
+    </form>
+  <?php } ?>
+</main>
+
+<?php require_once './partials/footer.php'; ?>
