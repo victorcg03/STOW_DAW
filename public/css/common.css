@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minMax(400px, 20%));
   place-items: center;
+  place-content: center;
   gap: 30px;
   padding: 90px;
   color: #fff;
