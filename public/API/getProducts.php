@@ -1,12 +1,6 @@
 <?php
 require_once '../database.php';
 
-// Habilitar CORS correctamente
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Content-Type: application/json");
-
 try {
     if (isset($_GET["id"])) {
         $statement = $conne->prepare("SELECT * FROM productos WHERE id = :id AND activo = 1");
