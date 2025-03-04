@@ -1,9 +1,5 @@
 env.php
 # Ignorar el directorio vendor
 /vendor/
-
-# Ignorar el archivo composer.lock
 composer.lock
 composer.json
-# Ignorar la carpeta de caché de Composer (puede ser útil si usas Composer)
-.cache/
