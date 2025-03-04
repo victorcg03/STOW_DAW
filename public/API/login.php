@@ -1,6 +1,4 @@
 <?php
-echo json_encode(["Existe el archivo" => file_exists(__DIR__ . '/vendor/autoload.php')]);
-die();
 require __DIR__ . '/vendor/autoload.php';  // Intenta cargar el autoloader
 
 
