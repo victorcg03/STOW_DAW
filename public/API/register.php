@@ -23,6 +23,6 @@ $hashed_password = password_hash($data->password, PASSWORD_BCRYPT);
 
 // Insertar el usuario
 $stmt = $pdo->prepare("INSERT INTO usuarios (Correo, Nombre, Apellidos, Contrasena, Verificado) VALUES (?, ?, ?, True)");
-$stmt->execute([$data->email, $data->name, $data->surname, $hashed_password]);
+$stmt->execute([$data->email, $data->name, $data->surnames, $hashed_password]);
 
 echo json_encode(["message" => "Usuario registrado correctamente"]);
