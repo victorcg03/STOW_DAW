@@ -1,11 +1,9 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';  // Intenta cargar el autoloader
-
+require __DIR__ . '/vendor/autoload.php';
 require 'config.php';
 require 'env.php';
 
 use Firebase\JWT\JWT;
-
 
 $data = json_decode(file_get_contents("php://input"));
 
