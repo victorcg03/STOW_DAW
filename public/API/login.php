@@ -1,6 +1,13 @@
 <?php
+require __DIR__ . '/vendor/autoload.php';
+
+if (class_exists('Firebase\JWT\JWT')) {
+  echo "La clase JWT está cargada correctamente.";
+} else {
+  echo "La clase JWT no se encuentra.";
+}
+
 require 'config.php';
-require __DIR__ . '/vendor/autoload.php';  // Cargar el autoload de la misma carpeta donde está el archivo login.php
 require 'env.php';
 
 use Firebase\JWT\JWT;
