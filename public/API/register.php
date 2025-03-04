@@ -6,7 +6,7 @@ error_log("Raw data received: " . $raw_data); // Esto registrará los datos en e
 $data = json_decode(file_get_contents("php://input"));
 if (!$data) {
   http_response_code(400);
-  echo json_encode(["message" => "Error en los datos enviados", "data" => file_get_contents("php://input")]);
+  echo json_encode(["message" => "Error en los datos enviados", "data" => file_get_contents("php://input"), "post" => $_POST]);
   exit;
 }
 
