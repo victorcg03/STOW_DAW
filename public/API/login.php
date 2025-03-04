@@ -1,6 +1,6 @@
 <?php
 require 'config.php';
-require 'vendor/autoload.php';  // Para JWT
+require __DIR__ . '/vendor/autoload.php';  // Cargar el autoload de la misma carpeta donde está el archivo login.php
 require 'env.php';
 
 use Firebase\JWT\JWT;
