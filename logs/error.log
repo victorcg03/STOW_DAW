@@ -1,0 +1,2 @@
+[Sun Feb 02 07:24:07.876935 2025] [core:error] [pid 3507] [client 35.89.137.11:34348] AH10244: invalid URI path (/cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/sh)
+[Sun Feb 02 21:10:08.756003 2025] [core:error] [pid 3506] [client 60.13.146.4:19820] AH10244: invalid URI path (/cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/sh)
