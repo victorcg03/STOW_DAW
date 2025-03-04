@@ -2,6 +2,11 @@
 require 'config.php';
 
 $data = json_decode(file_get_contents("php://input"));
+if (!$data) {
+  http_response_code(400);
+  echo json_encode(["message" => "Error en los datos enviados", "data" => null]);
+  exit;
+}
 
 if (!$data->email || !$data->password || !$data->name || !$data->surnames) {
   http_response_code(400);
