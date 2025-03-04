@@ -27,7 +27,7 @@ if (!$user || !password_verify($data->password, $user["Contrasena"])) {
 
 // Generar token JWT
 $payload = [
-  "user_id" => $user["Correo"],
+  "correo" => $user["Correo"],
   "exp" => time() + (60 * 60 * 24) // Expira en 24 horas
 ];
 
