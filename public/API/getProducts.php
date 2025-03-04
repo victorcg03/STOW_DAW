@@ -1,5 +1,8 @@
 <?php
 require_once 'config.php';
+header("Access-Control-Allow-Origin: *");  // Permite solicitudes de cualquier origen
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");  // Métodos permitidos
+header("Access-Control-Allow-Headers: Content-Type, Authorization");  // Cabeceras permitidas
 
 try {
     if (isset($_GET["id"])) {
