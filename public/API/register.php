@@ -4,9 +4,10 @@ require 'config.php';
 $data = json_decode(file_get_contents("php://input"));
 if (!$data) {
   http_response_code(400);
-  echo json_encode(["message" => "Error en los datos enviados", "data" => null]);
+  echo json_encode(["message" => "Error en los datos enviados", "data" => file_get_contents("php://input")]);
   exit;
 }
+
 
 if (!$data->email || !$data->password || !$data->name || !$data->surnames) {
   http_response_code(400);
@@ -27,7 +28,7 @@ if ($stmt->fetch()) {
 $hashed_password = password_hash($data->password, PASSWORD_BCRYPT);
 
 // Insertar el usuario
-$stmt = $pdo->prepare("INSERT INTO usuarios (Correo, Nombre, Apellidos, Contrasena, Verificado) VALUES (?, ?, ?, True)");
+$stmt = $pdo->prepare("INSERT INTO usuarios (Correo, Nombre, Apellidos, Contrasena, Verificado) VALUES (?, ?, ?, ?, True)");
 $stmt->execute([$data->email, $data->name, $data->surnames, $hashed_password]);
 
 echo json_encode(["message" => "Usuario registrado correctamente"]);
