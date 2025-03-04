@@ -5,7 +5,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 if (!$data->email || !$data->password || !$data->name || !$data->surnames) {
   http_response_code(400);
-  echo json_encode(["message" => "Todos los campos son obligatorios"]);
+  echo json_encode(["message" => "Todos los campos son obligatorios", "data" => $data]);
   exit;
 }
 
