@@ -4,7 +4,7 @@ require 'jwt_middleware.php';
 
 $decoded = verificarToken();
 
-$stmt = $pdo->prepare("SELECT Correo, Nombre, Apellidos FROM users WHERE Correo = ?");
+$stmt = $pdo->prepare("SELECT Correo, Nombre, Apellidos FROM usuarios WHERE Correo = ?");
 $stmt->execute([$decoded->correo]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
