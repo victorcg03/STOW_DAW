@@ -1,5 +1,7 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
+var_dump(file_exists(__DIR__ . '/vendor/autoload.php'));  // Verifica si el archivo existe
+require __DIR__ . '/vendor/autoload.php';  // Intenta cargar el autoloader
+
 
 if (class_exists('Firebase\JWT\JWT')) {
   echo "La clase JWT está cargada correctamente.";
