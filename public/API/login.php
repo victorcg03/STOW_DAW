@@ -1,5 +1,5 @@
 <?php
-var_dump(file_exists(__DIR__ . '/vendor/autoload.php'));  // Verifica si el archivo existe
+echo json_encode(["Existe el archivo" => file_exists(__DIR__ . '/vendor/autoload.php')]);
 require __DIR__ . '/vendor/autoload.php';  // Intenta cargar el autoloader
 
 
