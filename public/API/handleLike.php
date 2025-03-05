@@ -13,5 +13,5 @@ if ($stmt->rowCount() == 0) {
 } else {
   $stmt = $pdo->prepare("DELETE FROM likes WHERE Usuario = ? AND ProductoID = ?");
   $stmt->execute([$decoded->correo, $_POST['ID']]);
-  echo json_encode(["ok" => "ok"]);
+  echo json_encode(["ok" => "okk"]);
 }
