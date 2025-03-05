@@ -11,6 +11,6 @@ try {
 
   echo json_encode($likes);
 } catch (Exception $e) {
-  echo json_encode(array("message" => $e->getMessage()));
+  echo json_encode(array("message" =>  "fuck"));
   die();
 }
