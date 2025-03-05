@@ -5,7 +5,7 @@ $decoded = verificarToken();
 
 // Lee los datos JSON del cuerpo de la solicitud
 try {
-  $stmt = $pdo->prepare("SELECT ProductoID FROM likes WHERE Usuario = ? AND activo = 1");
+  $stmt = $pdo->prepare("SELECT ProductoID FROM likes WHERE Usuario = ?");
   $stmt->execute([$decoded->correo]);
   $likes = $stmt->fetch(PDO::FETCH_ASSOC);
 
