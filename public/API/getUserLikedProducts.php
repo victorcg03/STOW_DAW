@@ -7,7 +7,7 @@ $decoded = verificarToken();
 try {
   $stmt = $pdo->prepare("SELECT ProductoID FROM likes WHERE Usuario = ?");
   $stmt->execute([$decoded->correo]);
-  $likes = $stmt->fetch(PDO::FETCH_ASSOC);
+  $likes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   echo json_encode($likes);
 } catch (Exception $e) {
