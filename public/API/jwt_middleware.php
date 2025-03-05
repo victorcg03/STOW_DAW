@@ -11,12 +11,6 @@ function verificarToken()
   global $secret_key;
   $headers = apache_request_headers();
 
-  // Permitir solicitudes OPTIONS sin autenticación
-  if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
-  }
-
   if (!isset($headers["Authorization"])) {
     http_response_code(401);
     echo json_encode(["message" => "No autorizado"]);
