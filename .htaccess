@@ -3,15 +3,3 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
-
-# Habilitar CORS para todos los dominios
-Header set Access-Control-Allow-Origin "*"
-
-# Permitir métodos específicos (GET, POST, PUT, DELETE)
-Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-
-# Permitir encabezados personalizados
-Header set Access-Control-Allow-Headers "Content-Type, Authorization"
-
-# Para solicitudes de pre-vuelo (preflight)
-Header set Access-Control-Max-Age "3600"
