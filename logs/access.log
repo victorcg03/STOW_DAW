@@ -2861,3 +2861,4 @@
 47.82.11.150 - - [05/Mar/2025:12:45:22 +0000] "GET / HTTP/1.1" 301 423 "http://victorcorral.com" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.43"
 43.153.86.78 - - [05/Mar/2025:12:47:36 +0000] "GET / HTTP/1.1" 301 442 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
 79.117.140.186 - - [05/Mar/2025:14:15:22 +0000] "GET /API/getProducts.php HTTP/1.1" 301 527 "-" "PostmanRuntime/7.43.0"
+104.243.37.22 - - [05/Mar/2025:22:59:56 +0000] "GET /.env HTTP/1.1" 301 641 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:77.0) Gecko/20100101 Firefox/77.0"
