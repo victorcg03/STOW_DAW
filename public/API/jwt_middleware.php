@@ -30,7 +30,7 @@ function verificarToken()
     return $decoded;
   } catch (Exception $e) {
     http_response_code(401);
-    echo json_encode(["message" => "Token inválido"]);
+    echo json_encode(["message" => "Token inválido", "token" => $token]);
     exit;
   }
 }

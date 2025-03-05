@@ -1,5 +1,4 @@
 <?php
-
 require 'config.php';
 require 'jwt_middleware.php';
 
