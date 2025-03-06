@@ -11,7 +11,7 @@ try {
   $stmt->execute([$decoded->correo, $data['ID']]);
   $like = $stmt->fetch(PDO::FETCH_ASSOC);
 
-  if ($like) {
+  if ($stmt->rowCount() != 0) {
     $stmt = $pdo->prepare("INSERT INTO likes (ProductoID, Usuario) VALUES (?, ?)");
     $stmt->execute([$data['ID'], $decoded->correo]);
   } else {
