@@ -20,6 +20,6 @@ try {
   }
   echo json_encode(["ok" => true]);
 } catch (Exception $e) {
-  echo json_encode(array("message" => $e->getMessage()));
+  echo json_encode(array("message" => $e->getMessage(), "like" => $like));
   die();
 }
